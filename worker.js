@@ -52,7 +52,15 @@ async function latest(request, env, system) {
   const name = release?.files?.[system];
   if (!name) {
     // before the first release, and a system a release leaves out
-    if (!["macos", "windows", "windows-arm64", "linux-deb", "linux-deb-arm64"].includes(system))
+    if (
+      ![
+        "macos",
+        "windows",
+        "windows-arm64",
+        "linux-deb",
+        "linux-deb-arm64",
+      ].includes(system)
+    )
       return env.ASSETS.fetch(request);
     return new Response(null, {
       status: 302,

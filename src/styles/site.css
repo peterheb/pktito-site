@@ -57,7 +57,9 @@
   min-width: 200px;
   padding: 6px;
   background: var(--ground);
-  box-shadow: var(--shadow-float), 0 0 0 1px var(--sunk);
+  box-shadow:
+    var(--shadow-float),
+    0 0 0 1px var(--sunk);
 }
 .nav-menu a {
   padding: 10px 12px;
