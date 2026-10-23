@@ -4,13 +4,13 @@ description: libpktito, the C11 library under the app, with what it needs, its A
 order: 3
 ---
 
-The app transcribes with libpktito: NVIDIA's Parakeet TDT speech recognizers in C11, with no NeMo, PyTorch, ONNX Runtime or Python at run time. It has its own repository, [github.com/peterheb/pktito](https://github.com/peterheb/pktito), with a command-line program, `pktito`, beside the library.
+libpktito is NVIDIA's Parakeet-TDT speech models in C11, the engine under the app, with no Python, PyTorch or ONNX Runtime. It lives at [github.com/peterheb/pktito](https://github.com/peterheb/pktito).
 
 ## What it needs
 
 The C library, libm and pthreads. It builds on Linux, macOS, and Windows 10 and later (with MSYS2's MinGW-w64 gcc).
 
-A model is one `.pkf` file: the recognizer, its vocabulary, and Silero's VAD to cut long recordings at their pauses. The file is mapped, not copied, and transcribing needs some 25 to 90 MB beyond it, depending on the threads: 651 MB in all on a Raspberry Pi 5 with the English model (the repository's README). A 512 MB board can't hold the int8 0.6B model.
+A model is one `.pkf` file, mapped rather than copied: about 650 MB of memory in all while transcribing.
 
 ## The API
 
@@ -39,11 +39,11 @@ pk_text(m, t, (size_t)n, text, sizeof text);      /* NeMo's transcript */
 | `pk_language`                 | Which of the multilingual model's 25 languages a transcript's words are in.     |
 | `pk_backend`                  | The backend in use.                                                             |
 
-A model is read-only once loaded and can be shared by transcribers on any number of threads; a transcriber belongs to one thread at a time and runs its own pool. The library keeps no global state and prints nothing. `pk_asr_run` hears its samples as one utterance, so a recording longer than about 30 seconds goes through `pk_chunks` first. `examples/transcribe.c` is a whole program against the library in a page.
+A loaded model can be shared across threads; each transcriber belongs to one thread at a time. The library keeps no global state and prints nothing. Recordings longer than about 30 seconds go through `pk_chunks` first. `examples/transcribe.c` is a complete program in one page.
 
 ## Backends
 
-A build holds every backend of its CPU family the compiler can make, and the CPU picks the fastest it can run at load time. A binary copied to another machine of the same family runs there at that machine's best.
+A build holds every backend for its CPU family, and the fastest one the CPU supports is picked at load time.
 
 | Backend       | CPUs                                                          |
 | ------------- | ------------------------------------------------------------- |
@@ -54,7 +54,7 @@ A build holds every backend of its CPU family the compiler can make, and the CPU
 | `avx2`        | Haswell and later                                             |
 | `ref`         | Scalar C, for anything                                        |
 
-`PKTITO_KERNELS=neon` runs a given backend instead, to compare. All of them compute the same bits as `ref`, checked kernel by kernel.
+All compute the same bits as `ref`. `PKTITO_KERNELS=neon` forces a backend, to compare.
 
 ## Build
 
@@ -77,4 +77,4 @@ The repository holds pktito to NeMo at three levels:
 - **The numerics**: pktito multiplies in int8. Against float32 on 200 LibriSpeech recordings, the English model's word error rate is 1.51% for both; on 360 FLEURS recordings in six languages, the multilingual model's is 4.42% against 4.41%.
 - **The text**: the detokenizer gives NeMo's text on every vocabulary piece and on thousands of random sequences.
 
-And every backend on every machine writes the same transcript of the test recording, byte for byte, as `ref`. The [README](https://github.com/peterheb/pktito) has the method and the machines.
+The [README](https://github.com/peterheb/pktito) has the method and the machines.

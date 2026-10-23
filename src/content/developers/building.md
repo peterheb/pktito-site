@@ -19,8 +19,6 @@ The app's source is [github.com/peterheb/pktito-app](https://github.com/peterheb
   - **Windows**: MSYS2's MinGW-w64 gcc, with Rust's `x86_64-pc-windows-gnu` toolchain.
   - **Linux**: gcc or clang.
 
-The build compiles every SIMD backend of the target's CPU family, and the CPU picks the fastest it can run, so one build runs on any CPU of its kind.
-
 ## macOS and Windows x64
 
 ```sh
@@ -28,7 +26,7 @@ cargo tauri dev             # run it
 cargo tauri build           # the installer
 ```
 
-`cargo tauri build` makes a .dmg on macOS, and a setup .exe and .msi on Windows. `pktito-cli` is built with the app and goes in the bundle beside it.
+`pktito-cli` is built with the app and bundled beside it.
 
 ## Windows on Arm
 
@@ -51,7 +49,7 @@ cargo tauri build --target aarch64-pc-windows-gnullvm --bundles nsis --config \
 cargo tauri build --bundles deb   # the .deb
 ```
 
-The .deb depends on ffmpeg, which pktito uses to read every file on Linux, and recommends xdg-utils, which opens links and folders. It installs `pktito-cli` in `/usr/bin`, and registers `.pkf` model files with their own type and icon.
+The .deb depends on ffmpeg and recommends xdg-utils, for opening links and folders.
 
 ## Formatting
 
