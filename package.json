@@ -1,0 +1,16 @@
+{
+  "name": "pktito-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync": "node scripts/sync-from-app.mjs",
+    "tokens": "node scripts/tokens.mjs",
+    "dev": "npm run tokens && astro dev",
+    "build": "npm run tokens && astro build",
+    "preview": "npx wrangler@4 dev",
+    "deploy": "npm run build && npx wrangler@4 deploy"
+  },
+  "dependencies": {
+    "astro": "7.3.6"
+  }
+}

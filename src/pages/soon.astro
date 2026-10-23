@@ -1,0 +1,14 @@
+---
+// where /download/<key> goes while no release names a file for it (worker.js)
+import Base from "../layouts/Base.astro";
+import Arrow from "../components/Arrow.astro";
+import { GITHUB } from "../lib/site";
+---
+<Base title="Coming soon · pktito" description="This download is on its way.">
+  <main class="wrap">
+    <section class="page-head">
+      <h1 class="display">Coming soon.</h1>
+      <p class="measure">This download isn't posted yet. <Arrow href={GITHUB}>The source is on GitHub</Arrow></p>
+    </section>
+  </main>
+</Base>

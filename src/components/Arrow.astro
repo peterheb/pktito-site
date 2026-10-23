@@ -1,0 +1,5 @@
+---
+// A link to keep reading: its words, then the → that moves on hover.
+const { href } = Astro.props;
+---
+<a class="pk-link" href={href}><slot /> <span class="pk-arrow" aria-hidden="true">&rarr;</span></a>

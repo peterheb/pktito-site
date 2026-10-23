@@ -1,0 +1,37 @@
+---
+import Base from "../layouts/Base.astro";
+import Arrow from "../components/Arrow.astro";
+import { GITHUB } from "../lib/site";
+// the app's About > Privacy (pktito-app, ui/locales/en.json, privacy.*) says
+// the same of the app; the two change together, and keep the date
+---
+<Base title="Privacy · pktito" description="What pktito sends where: the app transcribes on your computer, and a model download and this site are the only things that reach the internet.">
+  <main class="wrap">
+    <section class="page-head">
+      <h1 class="display">Privacy</h1>
+      <p class="measure">pktito is local transcription software: it turns speech into text on your computer. Your media files are not uploaded to cloud servers, and the app has no accounts, ads or tracking. This page says what does reach the internet, and what happens to it.</p>
+      <p class="measure legal-date">Last updated October 23, 2026</p>
+    </section>
+    <section class="part">
+      <h2 class="lead">Downloading a model</h2>
+      <p class="measure">The app downloads AI models from models.pktito.net, hosted on a content delivery network (Cloudflare or bunny.net). The server logs your IP address, the time, the file requested and a standard user-agent string, but no name, account or device identifier.</p>
+      <p class="measure">These logs are used to keep the service secure and to count downloads in aggregate. We don't use them to identify you, combine them with other data, or sell or share them. To skip the download, use a model file you already have: choose “Open a model file…” in the app.</p>
+    </section>
+    <section class="part">
+      <h2 class="lead">This website</h2>
+      <p class="measure">pktito.net sets no cookies and runs no analytics. Cloudflare serves it, and like any web host it handles your IP address and browser details to deliver the pages and protect the site from abuse. When an installer download starts, the site adds one to that file’s count for the day. It keeps nothing else: no addresses, nothing that tells one visitor from another.</p>
+    </section>
+    <section class="part">
+      <h2 class="lead">Links</h2>
+      <p class="measure">Links in the app and on this site go to other sites, such as GitHub and Hugging Face. Their own privacy policies apply there.</p>
+    </section>
+    <section class="part">
+      <h2 class="lead">Your data</h2>
+      <p class="measure">Everything the app keeps is on your computer, in its data folder: your settings, the models and the recent transcripts. Clearing the recent list deletes its transcripts. Uninstalling pktito leaves its data folder for you to delete. We hold nothing about you to look up, correct or delete.</p>
+    </section>
+    <section class="part">
+      <h2 class="lead">Changes and questions</h2>
+      <p class="measure">If this policy changes, this page changes with it, under a new date, and the app’s copy comes with its next update. <Arrow href={`${GITHUB}/issues`}>Ask on GitHub</Arrow></p>
+    </section>
+  </main>
+</Base>

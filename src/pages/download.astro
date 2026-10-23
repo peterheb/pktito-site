@@ -1,0 +1,36 @@
+---
+import Base from "../layouts/Base.astro";
+import Arrow from "../components/Arrow.astro";
+// /download/<key> is the Worker's: a redirect to the file latest.json names
+// for that key (worker.js), so these links stay put from release to release
+---
+<Base title="Download pktito" description="pktito for macOS, Windows and Linux: transcribe audio and video on your computer." current="download">
+  <main class="wrap">
+    <section class="page-head">
+      <h1 class="display">Download</h1>
+      <p class="measure">On first launch pktito downloads one speech model: 624 MB for English, or 648 MB for 25 European languages.</p>
+    </section>
+    <section class="part">
+      <div class="tiles">
+        <div class="tile">
+          <h2 class="lead">macOS</h2>
+          <p>macOS 12 or later, on Apple silicon.</p>
+          <div class="buttons"><a class="pk-btn pk-btn-ink" href="/download/macos">Download for macOS</a></div>
+        </div>
+        <div class="tile">
+          <h2 class="lead">Windows</h2>
+          <p>Windows 10 or 11.</p>
+          <div class="buttons"><a class="pk-btn pk-btn-ink" href="/download/windows">x64</a><a class="pk-btn pk-btn-quiet" href="/download/windows-arm64">Arm64</a></div>
+        </div>
+        <div class="tile">
+          <h2 class="lead">Linux</h2>
+          <p>A .deb for Ubuntu 22.04, Debian 12, Raspberry Pi OS 12 and later. ffmpeg is installed with it.</p>
+          <div class="buttons"><a class="pk-btn pk-btn-ink" href="/download/linux-deb">x86-64</a><a class="pk-btn pk-btn-quiet" href="/download/linux-deb-arm64">Arm64</a></div>
+        </div>
+      </div>
+    </section>
+    <section class="part">
+      <p class="measure">The files pktito reads, and the models it uses, are in the docs. <Arrow href="/docs/getting-started">Getting started</Arrow></p>
+    </section>
+  </main>
+</Base>

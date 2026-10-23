@@ -1,0 +1,39 @@
+---
+import Base from "../layouts/Base.astro";
+import Arrow from "../components/Arrow.astro";
+import { GITHUB, LIBRARY } from "../lib/site";
+---
+<Base title="About pktito" description="What pktito is, who makes it, and the licenses of its code, models and typefaces." current="about">
+  <main class="wrap">
+    <section class="page-head about-head">
+      <div>
+        <h1 class="display">About</h1>
+        <p class="measure">pktito (“pick-a-tito”) is a compact implementation of NVIDIA's Parakeet-TDT speech models: an app for macOS, Windows and Linux, and a C library for anything with a C compiler. Both are open source under the MIT license.</p>
+        <p class="measure"><Arrow href={GITHUB}>The app on GitHub</Arrow> &nbsp; <Arrow href={LIBRARY}>The library</Arrow></p>
+      </div>
+      <div class="mascot-stage" id="mascot-stage" hidden>
+        <canvas id="mascot" tabindex="0" role="img" aria-label="pktito's mascot, a budgie beside a speech bubble and a transcript. Drag it or use the arrow keys to turn it; click it or press Enter and it chirps."></canvas>
+      </div>
+    </section>
+    <section class="part">
+      <h2 class="lead">Credits and licenses</h2>
+      <dl class="kv">
+        <dt>pktito</dt><dd>© 2026 Peter Hebert, MIT license</dd>
+        <dt>The speech models</dt><dd>NVIDIA's <a href="https://huggingface.co/nvidia/parakeet-tdt-0.6b-v2">parakeet-tdt-0.6b-v2</a> and <a href="https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3">-v3</a>, under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified by pktito (partly quantized to int8)</dd>
+        <dt>Silero VAD</dt><dd>MIT, Copyright (c) 2020-present Silero Team</dd>
+        <dt>Typefaces</dt><dd>Archivo and Commit Mono, SIL Open Font License 1.1 (<a href="/fonts/Archivo-OFL.txt">Archivo</a>, <a href="/fonts/CommitMono-OFL.txt">Commit Mono</a>)</dd>
+        <dt>Icons</dt><dd>After Feather, MIT</dd>
+      </dl>
+      <p class="measure">pktito is not affiliated with or endorsed by NVIDIA.</p>
+    </section>
+  </main>
+  <script is:inline src="/mascot/mascot-model.js"></script>
+  <script is:inline src="/mascot/mascot.js"></script>
+  <script is:inline>
+    // the budgie, where WebGL 2 draws it; nothing in its place where it can't
+    const stage = document.getElementById("mascot-stage");
+    stage.hidden = false;
+    const m = window.drawMascot && drawMascot(stage, document.getElementById("mascot"));
+    if (m) m.show(); else stage.hidden = true;
+  </script>
+</Base>

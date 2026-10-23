@@ -1,0 +1,110 @@
+---
+import Base from "../layouts/Base.astro";
+import Arrow from "../components/Arrow.astro";
+import { GITHUB, LIBRARY } from "../lib/site";
+// AliceBench v1, pktito 0.8.5, 2026-10-23 (ALICEBENCH.md in pktito-app):
+// times real time, the book's 10,731 s over each
+const SPEED = [
+  ["AMD Ryzen 9 9950X", "16 cores, Windows 11", 212.6, "50 s"],
+  ["NVIDIA DGX Spark", "GB10, 20 Arm cores", 113.0, "1 min 35 s"],
+  ["Mac mini", "M4 Pro", 106.1, "1 min 41 s"],
+  ["Raspberry Pi 5", "4 GB, 4 cores", 14.4, "12 min 25 s"],
+];
+const top = SPEED[0][2];
+---
+<Base title="pktito: speech to text on your computer" description="pktito transcribes audio and video on your computer, for macOS, Windows and Linux. Free and open source.">
+  <main>
+    <section class="hero2 wrap">
+      <div class="hero2-text">
+        <h1 class="display">Drop a file. Read it.</h1>
+        <p class="lead">Speech to text on your computer.</p>
+        <p class="measure">Open a recording or a video and read its transcript, every word timed to the audio. Click a timestamp to hear that moment.</p>
+        <div class="actions">
+          <a class="pk-btn pk-btn-primary" href="/download">Download</a>
+          <Arrow href={GITHUB}>Source on GitHub</Arrow>
+        </div>
+        <p class="platforms">Free and open source, for macOS, Windows and Linux.</p>
+      </div>
+      <figure class="shot">
+        <img class="light" src="/screenshots/mac-light.png" width="792" height="912" alt="The pktito window on a Mac, showing the transcript of chapter 1 of Alice's Adventures in Wonderland, each sentence beside its time." />
+        <img class="dark" src="/screenshots/mac-dark.png" width="792" height="912" alt="The pktito window on a Mac in dark mode, showing the transcript of chapter 1 of Alice's Adventures in Wonderland, each sentence beside its time." />
+      </figure>
+    </section>
+
+    <div class="band-surface">
+      <section class="sect wrap" aria-label="What it does">
+        <div class="facts3">
+          <div>
+            <h3>Broad format support</h3>
+            <p>pktito opens common formats like MP3, MP4, WAV and FLAC with no extra software. Integrates with ffmpeg for broader format support.</p>
+          </div>
+          <div>
+            <h3>Flexible output options</h3>
+            <p>Plain text, Markdown and JSON with timestamps. Subtitles as SRT or WebVTT.</p>
+          </div>
+          <div>
+            <h3>Two speech models</h3>
+            <p>English, or 25 European languages with the multilingual model.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="band-term">
+      <section class="sect wrap" aria-labelledby="fast">
+        <h2 id="fast">Faster than real time</h2>
+        <p class="measure">Time to transcribe twelve files (2 h 59 min) of <i>Alice's Adventures in Wonderland</i>, using the English model.</p>
+        <div class="speed" role="table" aria-label="Speed by machine">
+          <div class="speed-row speed-head" role="row"><span role="columnheader"><span class="visually-hidden">Machine</span></span><span aria-hidden="true"></span><span role="columnheader">Speed</span><span role="columnheader">Total time</span></div>
+          {SPEED.map(([name, about, x, time]) => (
+            <div class="speed-row" role="row">
+              <div class="speed-name" role="cell"><b>{name}</b><span>{about}</span></div>
+              <div class="speed-bar" aria-hidden="true"><i style={`width:${((x / top) * 100).toFixed(1)}%`}></i></div>
+              <div class="speed-x" role="cell">{Math.round(x)}&times;</div>
+              <div class="speed-time" role="cell">{time}</div>
+            </div>
+          ))}
+        </div>
+        <p class="provenance">AliceBench v1, pktito 0.8.5, October 2026. <Arrow href="/developers/benchmarks">Run it yourself</Arrow></p>
+      </section>
+    </div>
+
+    <section class="sect wrap" aria-labelledby="faq">
+      <h2 id="faq">Questions</h2>
+      <div class="faq">
+        <div>
+          <h3>What does it run on?</h3>
+          <ul>
+            <li><b>macOS</b> 12 or later, on Apple silicon</li>
+            <li><b>Windows</b> 10 and 11, on x64 or Arm</li>
+            <li><b>Linux</b> with glibc 2.34 or later (Ubuntu 22.04, Debian 12, Raspberry Pi OS 12), on x86-64 or Arm64</li>
+          </ul>
+          <p>The speech model, about 650 MB, is downloaded on first launch.</p>
+        </div>
+        <div>
+          <h3>Do I need a GPU?</h3>
+          <p>No. pktito runs entirely on the CPU, with kernels tuned for each processor family. Even a Raspberry Pi 5 transcribes 14 times faster than real time.</p>
+        </div>
+        <div>
+          <h3>Is it really free?</h3>
+          <p>Yes. pktito is open source under the MIT license, with no account, trial or ads, and free for commercial use. NVIDIA publishes its speech models under CC BY 4.0, which allows commercial use too.</p>
+        </div>
+        <div>
+          <h3>Does it need the internet?</h3>
+          <p>Only to download the AI speech model, once. Transcription runs fully offline.</p>
+        </div>
+        <div>
+          <h3>Is there a command line?</h3>
+          <p><code>pktito-cli</code> comes with the app and can be used in batch jobs or by agents. Its lightweight dependencies are ideal for sandboxes and constrained environments.</p>
+          <pre>pktito-cli interview.mp4 --srt
+pktito-cli --json -o transcripts *.m4a
+pktito-cli bench talks/</pre>
+        </div>
+        <div>
+          <h3>Can I build it into my own software?</h3>
+          <p>The engine is an MIT-licensed C11 library that needs only the C library, libm and threads. It runs on anything with a C compiler. <Arrow href="/developers/library">The library</Arrow></p>
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>

@@ -1,0 +1,134 @@
+/* pktito's site components: buttons, links, the wordmark and the stage.
+   Every value comes from tokens.css; classes are pk-*. The site is square;
+   a [data-ui] fragment of the app on it takes the app's sizes and corners.
+   The app has its own stylesheet (ui/app.css) on the same tokens. */
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.pk-num {
+  font-variant-numeric: tabular-nums;
+}
+.pk-ico {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  display: block;
+}
+code {
+  font-family: var(--font-mono);
+  font-size: 0.94em;
+}
+
+.pk-btn:focus-visible,
+.pk-link:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+[data-ui] .pk-btn:focus-visible {
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------- Button -- */
+.pk-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 48px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: var(--radius-0);
+  font: 500 16px/1 var(--font-sans);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.1s ease;
+}
+/* Hover and press as in the app: a tint over the fill, darker in light and
+   lighter in dark; on ink, term's lighter tint */
+.pk-btn:hover:not([disabled]) {
+  background-image: linear-gradient(var(--tint), var(--tint));
+}
+.pk-btn:active:not([disabled]) {
+  background-image: linear-gradient(var(--tint-press), var(--tint-press));
+  transform: translateY(1px);
+}
+.pk-btn-primary {
+  background-color: var(--plume);
+  color: var(--on-plume);
+}
+.pk-btn-ink {
+  background-color: var(--ink);
+  color: var(--ground);
+  --tint: var(--tint-term);
+  --tint-press: var(--tint-term-press);
+}
+.pk-btn-quiet {
+  background-color: var(--sunk);
+  color: var(--ink);
+}
+.pk-btn[disabled] {
+  opacity: 0.45;
+  cursor: default;
+}
+/* the app's size, inside a picture of it */
+[data-ui] .pk-btn {
+  height: 32px;
+  padding: 0 12px;
+  border-radius: var(--radius-ui);
+  font: 500 14px/1 var(--font-sans);
+  gap: 6px;
+}
+.pk-link {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  font-weight: 500;
+}
+.pk-link:hover {
+  text-decoration-thickness: 2px;
+}
+.pk-link .pk-arrow {
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+.pk-link:hover .pk-arrow {
+  transform: translateX(3px);
+}
+
+/* -------------------------------------------------------------- Wordmark -- */
+.pk-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.08em;
+  color: var(--ink);
+  text-decoration: none;
+  font: 700 24px/1 var(--font-sans);
+  letter-spacing: -0.03em;
+}
+.pk-wordmark::after {
+  content: "";
+  width: 0.5em;
+  height: 0.5em;
+  background: var(--beak);
+  flex: none;
+}
+
+/* ----------------------------------------------------------------- Stage -- */
+.pk-stage {
+  background: var(--plume);
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pk-btn,
+  .pk-link .pk-arrow {
+    transition: none;
+  }
+}

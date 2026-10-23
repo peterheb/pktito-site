@@ -1,0 +1,556 @@
+/* The new site's own layouts, on base.css (the old site's grid, type,
+   header, footer and pages) and the design system (tokens.css, bundle.css):
+   the header's nav, the home page's sections, the docs' three columns and
+   their Markdown. Areas are told apart by tone, never by a rule. */
+
+/* ------------------------------------------------------------- header -- */
+.site-head .wrap {
+  flex-wrap: nowrap;
+}
+.site-nav {
+  align-items: center;
+  font-size: 15px;
+  gap: 0 var(--space-4);
+}
+.site-nav .gh {
+  display: inline-flex;
+  padding: 10px 4px;
+}
+.site-nav .gh svg {
+  width: 20px;
+  height: 20px;
+}
+.site-nav .pk-btn {
+  height: 40px;
+  padding: 0 18px;
+  font-size: 15px;
+  text-decoration: none;
+  color: var(--on-plume);
+}
+.site-nav .pk-btn:hover {
+  text-decoration: none;
+}
+.site-nav .pk-btn[aria-current="page"] {
+  background-color: var(--surface);
+  color: var(--ink);
+}
+/* on a phone the links fold into a menu; Download stays out */
+.nav-more {
+  display: none;
+  position: relative;
+}
+.nav-more summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 10px 4px;
+  font-size: 15px;
+}
+.nav-more summary::-webkit-details-marker {
+  display: none;
+}
+.nav-more[open] .nav-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 20;
+  display: grid;
+  min-width: 200px;
+  padding: 6px;
+  background: var(--ground);
+  box-shadow: var(--shadow-float), 0 0 0 1px var(--sunk);
+}
+.nav-menu a {
+  padding: 10px 12px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.nav-menu a:hover {
+  background-image: linear-gradient(var(--tint), var(--tint));
+}
+@media (max-width: 720px) {
+  .site-nav > .wide {
+    display: none;
+  }
+  .nav-more {
+    display: block;
+  }
+}
+
+/* --------------------------------------------------------------- home -- */
+.hero2 {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--space-5);
+  align-items: center;
+  padding-block: var(--space-6);
+}
+.hero2-text {
+  display: grid;
+  gap: var(--space-4);
+  min-width: 0;
+}
+.hero2-text .lead {
+  max-width: 18em;
+}
+.hero2-text .measure {
+  color: var(--ink-muted);
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+}
+.platforms {
+  font-size: 15px;
+  color: var(--ink-muted);
+}
+/* the app as the system draws it; its bottom fades into the page */
+.shot {
+  margin: 0;
+  justify-self: center;
+  width: min(100%, 680px);
+  min-width: 0;
+}
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 97%);
+  mask-image: linear-gradient(to bottom, #000 72%, transparent 97%);
+}
+.shot .dark {
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .shot .light {
+    display: none;
+  }
+  :root:not([data-theme="light"]) .shot .dark {
+    display: block;
+  }
+}
+:root[data-theme="dark"] .shot .light {
+  display: none;
+}
+:root[data-theme="dark"] .shot .dark {
+  display: block;
+}
+
+/* sections told apart by tone: ground, a step off it, the strip's dark field */
+.sect {
+  padding-block: var(--space-7);
+  display: grid;
+  gap: var(--space-5);
+}
+.sect > h2 {
+  font: 500 26px/1.25 var(--font-sans);
+  letter-spacing: -0.01em;
+}
+.band-surface {
+  background: var(--surface);
+}
+.band-term {
+  background: var(--term);
+  color: var(--term-ink);
+  --ink-muted: var(--term-dim);
+  --link: var(--term-ink);
+  --focus: var(--plume);
+}
+.facts3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-5) var(--space-4);
+}
+.facts3 > div {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+  min-width: 0;
+}
+.facts3 h3,
+.faq h3 {
+  font: 500 18px/1.4 var(--font-sans);
+}
+.facts3 p,
+.faq p,
+.faq li {
+  color: var(--ink-muted);
+}
+
+.speed {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 860px;
+}
+.speed-row {
+  display: grid;
+  grid-template-columns: minmax(0, 15em) minmax(0, 1fr) 4em 7.5em;
+  gap: var(--space-3);
+  align-items: center;
+}
+.speed-head span {
+  font-size: 13px;
+  color: var(--ink-muted);
+  text-align: right;
+}
+.speed-name b {
+  display: block;
+  font-weight: 500;
+}
+.speed-name span {
+  font-size: 14px;
+  color: var(--ink-muted);
+}
+.speed-bar {
+  height: 28px;
+  background: var(--term-line);
+  position: relative;
+}
+.speed-bar i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--plume);
+}
+.speed-x,
+.speed-time {
+  font: 400 15px/1.3 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+.speed-x {
+  font-weight: 700;
+}
+
+.faq {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5) var(--space-6);
+}
+.faq > div {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+  min-width: 0;
+}
+.faq ul {
+  margin: 0;
+  padding-left: 1.2em;
+  display: grid;
+  gap: var(--space-1);
+}
+.faq li b {
+  color: var(--ink);
+  font-weight: 500;
+}
+.faq pre,
+.prose pre {
+  margin: 0;
+  padding: var(--space-3);
+  background: var(--term);
+  color: var(--term-ink);
+  font: 400 14px/1.6 var(--font-mono);
+  overflow-x: auto;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .hero2,
+  .faq {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .facts3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .speed-row {
+    grid-template-columns: minmax(0, 1fr) 3.5em 6.5em;
+  }
+  .speed-name {
+    grid-column: 1 / -1;
+  }
+  .speed-head > :first-child,
+  .speed-head > :nth-child(2) {
+    display: none;
+  }
+  .sect {
+    padding-block: var(--space-6);
+  }
+}
+
+/* ---------------------------------------------------------- the docs -- */
+/* three columns: the section's pages, the page, its headings */
+.docs {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr) 200px;
+  gap: var(--space-6);
+  align-items: start;
+  padding-block: var(--space-5) var(--space-7);
+}
+.docs-nav,
+.docs-toc {
+  position: sticky;
+  top: var(--space-4);
+  max-height: calc(100vh - 2 * var(--space-4));
+  overflow-y: auto;
+  font-size: 15px;
+}
+.docs-nav h2,
+.docs-toc h2 {
+  margin: 0 0 var(--space-2);
+  font: 500 13px/1.4 var(--font-sans);
+  color: var(--ink-muted);
+}
+.docs-nav ul,
+.docs-toc ul {
+  list-style: none;
+  margin: 0 0 var(--space-5);
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+.docs-nav a {
+  display: block;
+  padding: 7px 10px;
+  margin-left: -10px;
+  color: var(--ink);
+  text-decoration: none;
+  border-radius: var(--radius-0);
+}
+.docs-nav a:hover {
+  background-image: linear-gradient(var(--tint), var(--tint));
+}
+.docs-nav a[aria-current="page"] {
+  background-color: var(--surface);
+  font-weight: 500;
+}
+.docs-toc a {
+  display: block;
+  padding: 4px 0;
+  color: var(--ink-muted);
+  text-decoration: none;
+}
+.docs-toc a:hover {
+  color: var(--ink);
+}
+.docs-mobile {
+  display: none;
+}
+@media (max-width: 1180px) {
+  .docs {
+    grid-template-columns: 220px minmax(0, 1fr);
+  }
+  .docs-toc {
+    display: none;
+  }
+}
+@media (max-width: 800px) {
+  .docs {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+  .docs-nav {
+    display: none;
+  }
+  .docs-mobile {
+    display: block;
+    background: var(--surface);
+  }
+  .docs-mobile summary {
+    cursor: pointer;
+    padding: 12px 16px;
+    font-weight: 500;
+  }
+  .docs-mobile .docs-nav {
+    display: block;
+    position: static;
+    max-height: none;
+    padding: 0 16px 8px 26px;
+  }
+}
+
+/* ------------------------------------------------------------ Markdown -- */
+.prose {
+  max-width: 44em;
+  min-width: 0;
+}
+.prose > * + * {
+  margin-top: var(--space-3);
+}
+.prose h1 {
+  font: 700 clamp(36px, 4vw, 52px) / 1.05 var(--font-sans);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.prose .lede {
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--ink-muted);
+}
+.prose h2 {
+  font: 500 26px/1.25 var(--font-sans);
+  letter-spacing: -0.01em;
+  margin-top: var(--space-6);
+  scroll-margin-top: var(--space-4);
+}
+.prose h3 {
+  font: 500 19px/1.35 var(--font-sans);
+  margin-top: var(--space-5);
+  scroll-margin-top: var(--space-4);
+}
+.prose p,
+.prose li {
+  line-height: 1.6;
+}
+.prose ul,
+.prose ol {
+  padding-left: 1.3em;
+}
+.prose li + li {
+  margin-top: var(--space-1);
+}
+.prose a {
+  color: var(--link);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+.prose a:hover {
+  text-decoration-thickness: 2px;
+}
+.prose :not(pre) > code {
+  font: 400 0.88em/1 var(--font-mono);
+  background: var(--sunk);
+  padding: 0.15em 0.35em;
+  overflow-wrap: anywhere;
+}
+.prose pre code {
+  font: inherit;
+  background: none;
+}
+/* tables in tone, not rules: the header a step off, rows striped */
+.prose .table {
+  overflow-x: auto;
+}
+/* a wide table scrolls inside itself, not the page */
+.prose table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.prose th,
+.prose td {
+  text-align: left;
+  vertical-align: top;
+  padding: 9px 12px;
+}
+.prose th {
+  background: var(--sunk);
+  font-weight: 500;
+}
+.prose tbody tr:nth-child(even) {
+  background: var(--surface);
+}
+.prose td code {
+  white-space: nowrap;
+}
+.prose blockquote {
+  margin-left: 0;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface);
+}
+.prose blockquote > :first-child {
+  margin-top: 0;
+}
+.prose hr {
+  display: none;
+}
+.pager {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-top: var(--space-7);
+}
+.pager a {
+  display: grid;
+  gap: 2px;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+  min-width: 0;
+  flex: 1 1 0;
+}
+.pager a:hover {
+  background-image: linear-gradient(var(--tint), var(--tint));
+}
+.pager small {
+  color: var(--ink-muted);
+  font-size: 13px;
+}
+.pager .next {
+  text-align: right;
+}
+
+/* landing pages of Docs and Developers: their pages as tiles */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-4);
+}
+.card {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+  padding: var(--space-4);
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+}
+.card:hover {
+  background-image: linear-gradient(var(--tint), var(--tint));
+}
+.card b {
+  font: 500 18px/1.35 var(--font-sans);
+}
+.card span {
+  color: var(--ink-muted);
+  font-size: 15px;
+}
+
+/* About's budgie, where WebGL 2 draws it */
+.mascot-stage {
+  background: var(--surface);
+  aspect-ratio: 4 / 3;
+  max-width: 520px;
+  width: 100%;
+}
+.mascot-stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.about-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+  gap: var(--space-5);
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .about-head {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.about-head > div {
+  display: grid;
+  gap: var(--space-4);
+}
