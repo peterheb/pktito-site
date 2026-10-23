@@ -530,7 +530,6 @@
 
 /* About's budgie, where WebGL 2 draws it */
 .mascot-stage {
-  background: var(--surface);
   aspect-ratio: 4 / 3;
   max-width: 520px;
   width: 100%;
