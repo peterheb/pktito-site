@@ -4,7 +4,7 @@ description: Build the pktito app and pktito-cli from source on macOS, Windows a
 order: 5
 ---
 
-The app's source is [github.com/peterheb/pktito-app](https://github.com/peterheb/pktito-app). It carries a copy of the C library in `vendor/pktito`, so one clone builds everything.
+The app's source is [github.com/peterheb/pktito](https://github.com/peterheb/pktito). It carries a copy of the C library in `vendor/pktito`, so one clone builds everything.
 
 ## What you need
 

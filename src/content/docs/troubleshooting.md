@@ -4,7 +4,7 @@ description: What pktito's messages mean, and what to do about them.
 order: 5
 ---
 
-A message's **Details**, or its tooltip, has what the system or the server said. Include it when [reporting a problem](https://github.com/peterheb/pktito-app/issues).
+A message's **Details**, or its tooltip, has what the system or the server said. Include it when [reporting a problem](https://github.com/peterheb/pktito/issues).
 
 ## Reading a file
 
@@ -28,7 +28,7 @@ Network errors (**Can't reach models.pktito.net**, **Connection lost**, **isn't 
 | The download was damaged           | Choose **Try again**.                                            |
 | Not enough disk space              | Free about 650 MB and choose **Try again**.                      |
 | Couldn't save the model            | pktito can't write to its data folder; Details names the folder. |
-| Model not found                    | [Report it](https://github.com/peterheb/pktito-app/issues).      |
+| Model not found                    | [Report it](https://github.com/peterheb/pktito/issues).          |
 | … is downloading. Cancel it first. | Cancel the other download, or wait for it to finish.             |
 
 ## Model files

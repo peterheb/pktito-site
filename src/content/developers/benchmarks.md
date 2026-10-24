@@ -21,7 +21,7 @@ Run October 23, 2026; every run matched all 12 reference transcripts. The Mac mi
 
 ## Run it
 
-On macOS or Linux, from a clone of [pktito-app](https://github.com/peterheb/pktito-app):
+On macOS or Linux, from a clone of [pktito](https://github.com/peterheb/pktito):
 
 ```sh
 scripts/alicebench.sh [DIR]

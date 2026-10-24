@@ -4,7 +4,7 @@ description: libpktito, the C11 library under the app, with what it needs, its A
 order: 3
 ---
 
-libpktito is NVIDIA's Parakeet-TDT speech models in C11, the engine under the app, with no Python, PyTorch or ONNX Runtime. It lives at [github.com/peterheb/pktito](https://github.com/peterheb/pktito).
+libpktito is NVIDIA's Parakeet-TDT speech models in C11, the engine under the app, with no Python, PyTorch or ONNX Runtime. It lives at [github.com/peterheb/libpktito](https://github.com/peterheb/libpktito).
 
 ## What it needs
 
@@ -77,4 +77,4 @@ The repository holds pktito to NeMo at three levels:
 - **The numerics**: pktito multiplies in int8. Against float32 on 200 LibriSpeech recordings, the English model's word error rate is 1.51% for both; on 360 FLEURS recordings in six languages, the multilingual model's is 4.42% against 4.41%.
 - **The text**: the detokenizer gives NeMo's text on every vocabulary piece and on thousands of random sequences.
 
-The [README](https://github.com/peterheb/pktito) has the method and the machines.
+The [README](https://github.com/peterheb/libpktito) has the method and the machines.

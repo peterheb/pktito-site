@@ -1,6 +1,6 @@
 # pktito.net
 
-The site of [pktito](https://github.com/peterheb/pktito-app): the home page, Download, Docs and Developers (Markdown in `src/content`), About, Privacy, and `llms.txt` for agents. It's built with Astro into `dist/`, and served with the installers by a Cloudflare Worker (`worker.js`) that also counts downloads.
+The site of [pktito](https://github.com/peterheb/pktito): the home page, Download, Docs and Developers (Markdown in `src/content`), About, Privacy, and `llms.txt` for agents. It's built with Astro into `dist/`, and served with the installers by a Cloudflare Worker (`worker.js`) that also counts downloads.
 
 ```sh
 npm install
@@ -27,19 +27,19 @@ The download page links to `/download/macos`, `/download/windows`, `/download/wi
 Posting a release is its files first, then `latest.json`:
 
 ```sh
-npx wrangler@4 r2 object put pktito-releases/0.8.5/pktito_0.8.5_aarch64.dmg --file pktito_0.8.5_aarch64.dmg --remote
+npx wrangler@4 r2 object put pktito-releases/0.9.0/pktito_0.9.0_aarch64.dmg --file pktito_0.9.0_aarch64.dmg --remote
 npx wrangler@4 r2 object put pktito-releases/latest.json --file latest.json --content-type application/json --remote
 ```
 
 ```json
 {
-  "version": "0.8.5",
+  "version": "0.9.0",
   "files": {
-    "macos": "pktito_0.8.5_aarch64.dmg",
-    "windows": "pktito_0.8.5_x64-setup.exe",
-    "windows-arm64": "pktito_0.8.5_arm64-setup.exe",
-    "linux-deb": "pktito_0.8.5_amd64.deb",
-    "linux-deb-arm64": "pktito_0.8.5_arm64.deb"
+    "macos": "pktito_0.9.0_aarch64.dmg",
+    "windows": "pktito_0.9.0_x64-setup.exe",
+    "windows-arm64": "pktito_0.9.0_arm64-setup.exe",
+    "linux-deb": "pktito_0.9.0_amd64.deb",
+    "linux-deb-arm64": "pktito_0.9.0_arm64.deb"
   }
 }
 ```
