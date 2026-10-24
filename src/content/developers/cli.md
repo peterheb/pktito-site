@@ -116,9 +116,9 @@ Times are in seconds, to the millisecond.
 pktito-cli bench recordings/
 ```
 
-Times the transcription of each file, or of a folder's audio and video, and gives the total as times real time. Decoding the file isn't counted. It takes `-m`, `-t`, `-q` and `--json`.
+Times the transcription of each file, or of a folder's audio and video, and gives the total as times real time. Decoding the file isn't counted. It takes `-m`, `-t`, `-q` and `--json`. Its first lines name the backend the CPU picked and the compiler that built the engine: the speed depends on both, the transcript on neither.
 
-`--json` gives `pktito_cli`, `model`, `backend`, `threads`, `audio_s`, `seconds` and `x_real_time` for the whole, and `files`, each with `file`, `audio_s`, `seconds`, `x_real_time` and `transcript_sha256`. [AliceBench](/developers/benchmarks) is built on it.
+`--json` gives `pktito_cli`, `model`, `backend`, `compiler`, `threads`, `audio_s`, `seconds` and `x_real_time` for the whole, and `files`, each with `file`, `audio_s`, `seconds`, `x_real_time` and `transcript_sha256`. [AliceBench](/developers/benchmarks) is built on it.
 
 ### Finding the fastest thread count
 
