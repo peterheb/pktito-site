@@ -561,3 +561,8 @@
   display: grid;
   gap: var(--space-4);
 }
+/* a table cell's second line: a machine's cores and CPU under its name */
+.prose td small {
+  font-size: 13px;
+  color: var(--ink-muted);
+}
