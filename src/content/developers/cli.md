@@ -120,6 +120,20 @@ Times the transcription of each file, or of a folder's audio and video, and give
 
 `--json` gives `pktito_cli`, `model`, `backend`, `threads`, `audio_s`, `seconds` and `x_real_time` for the whole, and `files`, each with `file`, `audio_s`, `seconds`, `x_real_time` and `transcript_sha256`. [AliceBench](/developers/benchmarks) is built on it.
 
+### Finding the fastest thread count
+
+By default pktito uses a thread for each core. On a chip with two kinds of core, such as Intel's performance and efficiency cores or an Arm chip's big and little ones, it also times the fast cores alone against all of them early in the first long recording, and keeps whichever was quicker. That choice is a quick guess. Hyperthreading, other work on the machine, or a close race can make it pick the slower one.
+
+If you will transcribe a lot on one machine, bench a few of your own files at the default, then at a few fixed thread counts, and keep the fastest:
+
+```sh
+pktito-cli bench recordings/          # the default
+pktito-cli bench -t 8 recordings/     # e.g. the number of performance cores
+pktito-cli bench -t 12 recordings/
+```
+
+Then pass `-t` when you transcribe, or set `PKTITO_THREADS`, which `pktito-cli` and the app both read. The transcript is the same at any thread count; only the speed changes.
+
 ## Exit codes
 
 | Code | When                                        |
