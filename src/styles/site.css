@@ -245,9 +245,15 @@
   color: var(--ink);
   font-weight: 500;
 }
+/* in prose, the space above comes from .prose > * + * */
+.faq pre {
+  margin: 0;
+}
+.prose pre {
+  margin-bottom: 0;
+}
 .faq pre,
 .prose pre {
-  margin: 0;
   padding: var(--space-3);
   background: var(--term);
   color: var(--term-ink);
@@ -400,12 +406,12 @@
 .prose h2 {
   font: 500 26px/1.25 var(--font-sans);
   letter-spacing: -0.01em;
-  margin-top: var(--space-6);
+  margin-top: var(--space-5);
   scroll-margin-top: var(--space-4);
 }
 .prose h3 {
   font: 500 19px/1.35 var(--font-sans);
-  margin-top: var(--space-5);
+  margin-top: var(--space-4);
   scroll-margin-top: var(--space-4);
 }
 .prose p,
