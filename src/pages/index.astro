@@ -6,11 +6,11 @@ import { GITHUB, LIBRARY } from "../lib/site";
 // time, the book's 10,731 s over each. A machine's kind, then its cores and
 // CPU.
 const SPEED = [
-  ["Windows Workstation", "16 cores, AMD Ryzen 9 9950X", 212.6, "50 s"],
+  ["Windows Workstation", "16 cores, AMD Ryzen 9 9950X", 238.8, "45 s"],
   ["EC2 c8a.xlarge", "4 cores, AMD EPYC 9R45 (Zen 5)", 125.9, "1 min 25 s"],
-  ["Mac mini", "12 cores, Apple M4 Pro", 106.1, "1 min 41 s"],
+  ["Mac mini", "12 cores, Apple M4 Pro", 123.0, "1 min 27 s"],
   ["Windows Laptop", "4 cores, Intel Core i7-1185G7", 37.0, "4 min 50 s"],
-  ["Raspberry Pi 5", "4 cores, Cortex-A76, 4 GB", 14.4, "12 min 25 s"],
+  ["Raspberry Pi 5", "4 cores, Cortex-A76, 4 GB", 14.5, "12 min 19 s"],
 ];
 const top = SPEED[0][2];
 ---
@@ -67,7 +67,7 @@ const top = SPEED[0][2];
             </div>
           ))}
         </div>
-        <p class="provenance">AliceBench v1, pktito 0.8.4 to 0.9.1, October 2026. <Arrow href="/developers/benchmarks">Run it yourself</Arrow></p>
+        <p class="provenance">AliceBench v1, pktito 0.9.1, October 2026. <Arrow href="/developers/benchmarks">Run it yourself</Arrow></p>
       </section>
     </div>
 

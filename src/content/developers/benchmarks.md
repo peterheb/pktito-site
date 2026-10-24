@@ -12,13 +12,13 @@ AliceBench v1 times pktito transcribing LibriVox's public-domain recording of _A
 
 | Machine                                                           | × real time | Whole book | pktito | Backend     | Threads |
 | ----------------------------------------------------------------- | ----------: | ---------: | ------ | ----------- | ------: |
-| Windows Workstation<br><small>16 cores, AMD Ryzen 9 9950X</small> |       212.6 |       0:50 | 0.8.5  | avx2-vnni   |      16 |
+| Windows Workstation<br><small>16 cores, AMD Ryzen 9 9950X</small> |       238.8 |       0:45 | 0.9.1  | avx512-vnni |      16 |
 | EC2 c8a.xlarge<br><small>4 cores, AMD EPYC 9R45 (Zen 5)</small>   |       125.9 |       1:25 | 0.9.1  | avx512-vnni |       4 |
-| Mac mini<br><small>12 cores, Apple M4 Pro</small>                 |       106.1 |       1:41 | 0.8.4  | neon-dp     |      12 |
+| Mac mini<br><small>12 cores, Apple M4 Pro</small>                 |       123.0 |       1:27 | 0.9.1  | neon-dp     |      12 |
 | Windows Laptop<br><small>4 cores, Intel Core i7-1185G7</small>    |        37.0 |       4:50 | 0.9.1  | avx512-vnni |       4 |
-| Raspberry Pi 5<br><small>4 cores, Cortex-A76, 4 GB</small>        |        14.4 |      12:25 | 0.8.5  | neon-dp     |       4 |
+| Raspberry Pi 5<br><small>4 cores, Cortex-A76, 4 GB</small>        |        14.5 |      12:19 | 0.9.1  | neon-dp     |       4 |
 
-Run October 23 and 24, 2026; every run matched all 12 reference transcripts. The Mac mini was in use at the time. The laptop is a Surface Pro 8, plugged in, in the Balanced power mode.
+Run October 24, 2026; every run matched all 12 reference transcripts. The Mac mini was in use at the time. The laptop is a Surface Pro 8, plugged in, in the Balanced power mode.
 
 ## Run it
 
