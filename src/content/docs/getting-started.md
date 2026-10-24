@@ -14,7 +14,7 @@ Download pktito for your system from the [download page](/download).
 | Windows | Windows 10 or 11, x64 or Arm64                                                     | A setup program, which also puts `pktito-cli` on the PATH. |
 | Linux   | glibc 2.34 or later (Ubuntu 22.04, Debian 12, Raspberry Pi OS 12), x86-64 or Arm64 | A .deb, with ffmpeg as a dependency.                       |
 
-Windows N editions need the Media Feature Pack, or ffmpeg, to read audio and video.
+Windows N editions need the Media Feature Pack, or ffmpeg, to read audio and video other than WAV and AIFF.
 
 ## Choose a model
 

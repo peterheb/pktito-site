@@ -16,7 +16,7 @@ order: 2
 | Windows | `https://pktito.net/download/windows` (x64), `https://pktito.net/download/windows-arm64`        | On the PATH, in a new terminal                       |
 | Linux   | `https://pktito.net/download/linux-deb` (x86-64), `https://pktito.net/download/linux-deb-arm64` | `/usr/bin/pktito-cli`                                |
 
-On Linux, install the .deb with apt (`sudo apt install ./pktito_*.deb`) so that ffmpeg, which `pktito-cli` reads files through there, comes with it.
+`pktito-cli` reads WAV and AIFF itself on every system, so a sandbox or server that only transcribes WAV needs nothing else. On Linux, install the .deb with apt (`sudo apt install ./pktito_*.deb`) so that ffmpeg, which reads every other format there, comes with it.
 
 ## Transcribe
 
@@ -32,6 +32,6 @@ The JSON's `segments` hold the sentences, each with `start`, `end`, `text` and i
 ## Failures to expect
 
 - `no model yet: … pktito-cli download parakeet-tdt-0.6b-v2`: run that download.
-- `Install ffmpeg to read audio and video here`: on Linux, install ffmpeg.
+- `Install ffmpeg to read audio and video here`: on Linux, install ffmpeg, or convert the file to WAV.
 
 Other messages are explained in [Troubleshooting](/docs/troubleshooting).

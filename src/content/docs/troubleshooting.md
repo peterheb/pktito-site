@@ -8,16 +8,17 @@ A message's **Details**, or its tooltip, has what the system or the server said.
 
 ## Reading a file
 
-| Message                                           | What to do                                                                           |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| File not found                                    | The file was moved or deleted after it was added. Add it again from where it is now. |
-| Not audio or video                                | The file isn't a recording, whatever its name says.                                  |
-| No audio track                                    | The video has no sound.                                                              |
-| Can't read this file. Installing ffmpeg may help. | Install ffmpeg; [Formats](/docs/formats) shows which formats need it.                |
-| Can't read this file                              | The file may be damaged.                                                             |
-| Install ffmpeg to read audio and video here       | On Linux: `sudo apt install ffmpeg`.                                                 |
-| Couldn't start ffmpeg                             | Check that `ffmpeg -version` works in a terminal, or reinstall ffmpeg.               |
-| Can't convert this audio                          | Convert the file to WAV or MP3.                                                      |
+| Message                                                                                                                 | What to do                                                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| File not found                                                                                                          | The file was moved or deleted after it was added. Add it again from where it is now.                                                       |
+| Not audio or video                                                                                                      | The file isn't a recording, whatever its name says.                                                                                        |
+| No audio track                                                                                                          | The video has no sound.                                                                                                                    |
+| Can't read this file. Installing ffmpeg may help.                                                                       | Install ffmpeg; [Formats](/docs/formats) shows which formats need it.                                                                      |
+| Can't read this file                                                                                                    | The file may be damaged.                                                                                                                   |
+| Install ffmpeg to read audio and video here                                                                             | On Linux: `sudo apt install ffmpeg`.                                                                                                       |
+| This Windows has no Media Foundation. Install the Media Feature Pack, or ffmpeg, to read files other than WAV and AIFF. | Windows N: add the Media Feature Pack in Settings, Optional features. Windows Server: add the Media Foundation feature. Or install ffmpeg. |
+| Couldn't start ffmpeg                                                                                                   | Check that `ffmpeg -version` works in a terminal, or reinstall ffmpeg.                                                                     |
+| Can't convert this audio                                                                                                | Convert the file to WAV or MP3.                                                                                                            |
 
 ## Downloading the model
 
