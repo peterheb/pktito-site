@@ -1,16 +1,16 @@
 ---
 title: Formats
-description: The audio and video files pktito reads on macOS, Windows and Linux, and with ffmpeg.
+description: The audio and video files pktito opens, and the ones ffmpeg adds.
 order: 2
 ---
 
 ## How pktito reads a file
 
-pktito reads WAV and AIFF itself, the same way on every system, with nothing else installed. Everything else goes to the system's own media library: AVFoundation on macOS, Media Foundation on Windows. Linux uses ffmpeg, which the .deb installs. On macOS and Windows, ffmpeg (when it's installed) reads what the system can't.
+pktito reads WAV and AIFF itself. Other formats go to the system's media support on macOS and Windows, and to ffmpeg on Linux. Where ffmpeg is installed, it opens what the system can't.
 
 ## The formats
 
-Tested on macOS 27, Windows 11 and Ubuntu 26.04, October 2026.
+Tested on macOS 27, Windows 11 and Ubuntu 26.04.
 
 | File                                                                       | macOS | Windows | ffmpeg |
 | -------------------------------------------------------------------------- | :---: | :-----: | :----: |
@@ -31,15 +31,14 @@ Tested on macOS 27, Windows 11 and Ubuntu 26.04, October 2026.
 | AVI: MPEG-4 with MP3                                                       |   –   |    ✓    |   ✓    |
 | FLV; Ogg Theora                                                            |   –   |    –    |   ✓    |
 
-A file with several audio tracks gives its first.
+pktito transcribes a file's first audio track.
 
-## The same transcript everywhere
+## Installing ffmpeg
 
-A lossless file (WAV, AIFF, FLAC, ALAC) gives the same transcript on every system. A lossy one can differ by a word or two, since each system decodes it slightly differently.
+pktito finds ffmpeg on its own once it's installed:
 
-## Choosing the reader
+- **macOS**: `brew install ffmpeg`, with [Homebrew](https://brew.sh).
+- **Windows**: `winget install Gyan.FFmpeg` in a terminal. Scoop's and Chocolatey's ffmpeg work too.
+- **Linux**: the .deb installs it.
 
-`PKTITO_DECODER` overrides the choice, for the app and `pktito-cli`:
-
-- `PKTITO_DECODER=ffmpeg` reads everything through ffmpeg.
-- `PKTITO_DECODER=os` uses the system alone: not pktito's reader, and never ffmpeg.
+Other builds are on [ffmpeg.org](https://ffmpeg.org/download.html).

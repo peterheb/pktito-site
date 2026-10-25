@@ -4,7 +4,7 @@ description: Build the pktito app and pktito-cli from source on macOS, Windows a
 order: 5
 ---
 
-The app's source is [github.com/peterheb/pktito](https://github.com/peterheb/pktito). It carries a copy of the C library in `vendor/pktito`, so one clone builds everything.
+The app's source is [github.com/peterheb/pktito](https://github.com/peterheb/pktito). It carries a copy of libpktito in `vendor/pktito`, so one clone builds everything.
 
 ## What you need
 
@@ -62,6 +62,6 @@ npx prettier@3.6.2 --write .
 
 `cargo fmt --check` and `npx prettier@3.6.2 --check .` say whether either is due. `.prettierignore` leaves out files that scripts write and the design system's own files.
 
-## The C library
+## libpktito
 
-`scripts/vendor-pktito.sh` copies the library's sources into `vendor/pktito`, and `vendor/pktito/VENDORED` names the commit. To build the library on its own, see [The C library](/developers/library).
+`scripts/vendor-pktito.sh` copies the library's sources into `vendor/pktito`, and `vendor/pktito/VENDORED` names the commit. To build the library on its own, see [libpktito](/developers/library).

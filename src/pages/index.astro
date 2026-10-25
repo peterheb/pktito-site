@@ -20,12 +20,12 @@ const top = SPEED[0][2];
       <div class="hero2-text">
         <h1 class="display">Drop a file. Read it.</h1>
         <p class="lead">Speech to text on your computer.</p>
-        <p class="measure">Open a recording or a video and read its transcript, every word timed to the audio. Click a timestamp to hear that moment.</p>
+        <p class="measure">Convert speech to text without the cloud. No GPU or fancy hardware required.</p>
         <div class="actions">
           <a class="pk-btn pk-btn-primary" href="/download">Download</a>
           <Arrow href={GITHUB}>Source on GitHub</Arrow>
         </div>
-        <p class="platforms">Free and open source, for macOS, Windows and Linux.</p>
+        <p class="platforms">Open source for macOS, Windows and Linux.</p>
       </div>
       <figure class="shot">
         <img class="light" src="/screenshots/mac-light.png" width="792" height="912" alt="The pktito window on a Mac, showing the transcript of chapter 1 of Alice's Adventures in Wonderland, each sentence beside its time." />
@@ -38,7 +38,7 @@ const top = SPEED[0][2];
         <div class="facts3">
           <div>
             <h3>Broad format support</h3>
-            <p>pktito opens common formats like MP3, MP4, WAV and FLAC with no extra software. Integrates with ffmpeg for broader format support.</p>
+            <p>pktito opens common formats like MP3, MP4, WAV and FLAC. Optionally integrates with ffmpeg for broader format support.</p>
           </div>
           <div>
             <h3>Flexible output options</h3>
@@ -46,7 +46,7 @@ const top = SPEED[0][2];
           </div>
           <div>
             <h3>Two speech models</h3>
-            <p>English, or 25 European languages with the multilingual model.</p>
+            <p>Choose NVIDIA's English model, or a multilingual model with 25 European languages.</p>
           </div>
         </div>
       </section>
@@ -104,7 +104,7 @@ pktito-cli bench talks/</pre>
         </div>
         <div>
           <h3>Can I build it into my own software?</h3>
-          <p>The engine is an MIT-licensed C11 library that needs only the C library, libm and threads. It runs on anything with a C compiler. <Arrow href="/developers/library">The library</Arrow></p>
+          <p>The engine is an MIT-licensed C11 library that needs only the C library, libm and threads. It runs on anything with a C compiler. <Arrow href="/developers/library">libpktito</Arrow></p>
         </div>
       </div>
     </section>

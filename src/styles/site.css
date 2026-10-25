@@ -478,6 +478,11 @@ a.pk-link {
 .prose td code {
   white-space: nowrap;
 }
+/* a SHA-256 breaks where it must rather than scroll its table */
+.prose td code.hash {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
 .prose blockquote {
   margin-left: 0;
   padding: var(--space-3) var(--space-4);

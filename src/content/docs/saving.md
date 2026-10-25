@@ -1,33 +1,65 @@
 ---
 title: Saving
-description: Save a transcript as text, subtitles, Markdown or JSON, save a whole batch at once, or copy it.
+description: Save a transcript as text, subtitles, Markdown or JSON.
 order: 4
 ---
 
 ## Save as
 
-| Format                 | File    | What it holds                                                     |
-| ---------------------- | ------- | ----------------------------------------------------------------- |
-| Text                   | `.txt`  | The sentences, one to a line.                                     |
-| Subtitles              | `.srt`  | Numbered cues with their start and end times.                     |
-| Web subtitles          | `.vtt`  | The same cues as WebVTT.                                          |
-| Markdown               | `.md`   | The file's name as a heading, then a paragraph for each sentence. |
-| JSON with word timings | `.json` | The sentences, every word's start and end, and the subtitle cues. |
+| Format        | File    | What it holds                                  |
+| ------------- | ------- | ---------------------------------------------- |
+| Text          | `.txt`  | The sentences, one to a line.                  |
+| Subtitles     | `.srt`  | Timed caption cues.                            |
+| Web subtitles | `.vtt`  | The same cues, as WebVTT.                      |
+| Markdown      | `.md`   | A heading, then a paragraph for each sentence. |
+| JSON          | `.json` | Sentences, word timings and caption cues.      |
 
-**Timestamps in .txt and .md**, at the bottom of the menu, puts each sentence's start time before it. Ctrl+S saves as text and Ctrl+Shift+S as subtitles (⌘S and ⌘⇧S on a Mac). `pktito-cli` writes the same files; [its reference](/developers/cli#json-output) lists the JSON's fields.
+**Timestamps in .txt and .md**, at the bottom of the menu, puts each sentence's start time before it. Ctrl+S saves as text and Ctrl+Shift+S as subtitles (⌘S and ⌘⇧S on a Mac).
 
-## Where it goes
+## Subtitles and captions
 
-With **Save next to the original** checked, the transcript is saved beside the original. Otherwise a dialog asks. pktito never writes over a file: a second `talk.txt` becomes `talk 2.txt` (`talk (2).txt` on Windows).
+pktito can make the first draft of a video's subtitles. It breaks sentences into caption-friendly cues of one or two lines, at most 42 characters each, and marks any cue that goes by faster than 20 characters a second. Switch a finished transcript from **Sentences** to **Captions** to see them, then save as SRT or WebVTT to import into a video editor, player or captioning tool.
 
-## Save all
+Treat the file as a draft: good captions still need a person's pass for proper names, spelling and consistency.
 
-A batch has **Save all**: text or subtitles next to each original, or every format into one folder. Files still being transcribed are saved as each one finishes.
+## JSON
 
-## Copy
+A JSON transcript holds the file's name, its length in seconds and the model used, then every sentence with its words, and the caption cues. All times are in seconds. From chapter 1 of _Alice's Adventures in Wonderland_, shortened to one sentence:
 
-The copy button copies the text, or in the Captions view the cues as SRT. While a file is still being transcribed, it copies the text so far.
+```json
+{
+  "file": "wonderland_ch_01.flac",
+  "duration": 640.505,
+  "model": "parakeet-tdt-0.6b-v2",
+  "segments": [
+    {
+      "start": 27.601,
+      "end": 29.121,
+      "text": "And what's the use of a book?",
+      "words": [
+        { "start": 27.601, "end": 27.681, "text": "And" },
+        { "start": 27.761, "end": 28.081, "text": "what's" },
+        { "start": 28.081, "end": 28.161, "text": "the" },
+        { "start": 28.161, "end": 28.401, "text": "use" },
+        { "start": 28.401, "end": 28.481, "text": "of" },
+        { "start": 28.481, "end": 28.641, "text": "a" },
+        { "start": 28.641, "end": 29.121, "text": "book?" }
+      ]
+    }
+  ],
+  "captions": [
+    {
+      "start": 27.601,
+      "end": 29.28,
+      "lines": ["And what's the use of a book?"]
+    },
+    {
+      "start": 29.28,
+      "end": 32.4,
+      "lines": ["thought Alice,", "without pictures or conversation."]
+    }
+  ]
+}
+```
 
-## Sentences and captions
-
-A finished transcript can show its **Sentences**, as the model wrote them, or its **Captions**: the subtitle cues, one or two lines of at most 42 characters each. A cue that asks more than 20 characters a second of its reader is marked.
+`pktito-cli` writes the same file; [its reference](/developers/cli#json-output) lists every field.

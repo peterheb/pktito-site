@@ -30,11 +30,11 @@ import { GITHUB, LIBRARY } from "../lib/site";
   <script is:inline src="/mascot/mascot-model.js"></script>
   <script is:inline src="/mascot/mascot.js"></script>
   <script is:inline>
-    // the budgie, where WebGL 2 draws it, turned 55° toward the words beside
-    // it (as far as its bubble stays readable); nothing where it can't
+    // the budgie, where WebGL 2 draws it, turned 25° toward the words beside
+    // it, near enough to facing us; nothing where it can't
     const stage = document.getElementById("mascot-stage");
     stage.hidden = false;
-    const m = window.drawMascot && drawMascot(stage, document.getElementById("mascot"), { yaw: -55 });
+    const m = window.drawMascot && drawMascot(stage, document.getElementById("mascot"), { yaw: -25 });
     if (m) m.show(); else stage.hidden = true;
   </script>
 </Base>

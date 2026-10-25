@@ -1,6 +1,6 @@
 ---
-title: The C library
-description: libpktito, the C11 library under the app, with what it needs, its API, its backends and how to build it.
+title: libpktito
+description: The C11 library under the app, with what it needs, its API, its backends and how to build it.
 order: 3
 ---
 

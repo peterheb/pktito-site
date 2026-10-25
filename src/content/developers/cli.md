@@ -136,6 +136,13 @@ pktito-cli bench -t 12 recordings/
 
 Then pass `-t` when you transcribe, or set `PKTITO_THREADS`, which `pktito-cli` and the app both read. The transcript is the same at any thread count; only the speed changes.
 
+## Choosing the decoder
+
+`PKTITO_DECODER` overrides how files are read, for `pktito-cli` and the app:
+
+- `PKTITO_DECODER=ffmpeg` reads everything through ffmpeg.
+- `PKTITO_DECODER=os` uses the system's media support alone: not pktito's own WAV and AIFF reader, and never ffmpeg.
+
 ## Exit codes
 
 | Code | When                                        |
