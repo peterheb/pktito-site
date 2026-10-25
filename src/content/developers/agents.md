@@ -8,7 +8,7 @@ order: 2
 
 ## Install
 
-`pktito-cli` comes with the app's installers. These addresses always give the latest release:
+`pktito-cli` comes with the app's installers, and on its own. These addresses always give the latest release:
 
 | System  | Installer                                                                                       | `pktito-cli`                                         |
 | ------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
@@ -16,7 +16,21 @@ order: 2
 | Windows | `https://pktito.net/download/windows` (x64), `https://pktito.net/download/windows-arm64`        | On the PATH, in a new terminal                       |
 | Linux   | `https://pktito.net/download/linux-deb` (x86-64), `https://pktito.net/download/linux-deb-arm64` | `/usr/bin/pktito-cli`                                |
 
-`pktito-cli` reads WAV and AIFF itself on every system, so a sandbox or server that only transcribes WAV needs nothing else. On Linux, install the .deb with apt (`sudo apt install ./pktito_*.deb`) so that ffmpeg, which reads every other format there, comes with it.
+For a server or a sandbox, `pktito-cli` alone, with nothing installed:
+
+| System               | `pktito-cli` alone                            |
+| -------------------- | --------------------------------------------- |
+| macOS, Apple silicon | `https://pktito.net/download/cli-macos`       |
+| Linux x86-64         | `https://pktito.net/download/cli-linux`       |
+| Linux Arm64          | `https://pktito.net/download/cli-linux-arm64` |
+
+```sh
+curl -fL -o pktito-cli https://pktito.net/download/cli-linux && chmod +x pktito-cli
+```
+
+On Linux it needs glibc 2.34 or later and nothing more. The release's checksums are at `https://pktito.net/download/sha256sums`.
+
+`pktito-cli` reads WAV and AIFF itself on every system, so a sandbox or server that only transcribes WAV needs nothing else. For other formats on Linux, install ffmpeg, or install the .deb with apt (`sudo apt install ./pktito_*.deb`), which brings it.
 
 ## Transcribe
 

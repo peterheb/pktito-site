@@ -14,6 +14,8 @@ It comes with the app.
 - **Linux**: the .deb installs it in `/usr/bin`.
 - **macOS**: choose **Install Command Line Tool…** from the pktito menu, which links it into `/usr/local/bin`. Until then it is at `/Applications/pktito.app/Contents/MacOS/pktito-cli`.
 
+Without the app, `pktito-cli` alone is a download for macOS and Linux: see [For AI agents](/developers/agents#install).
+
 ## Usage
 
 ```sh

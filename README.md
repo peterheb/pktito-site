@@ -22,9 +22,9 @@ The design system, the voice included, lives in pktito-app's `design/README.md`.
 
 ## Installers
 
-The download page links to `/download/macos`, `/download/windows`, `/download/windows-arm64`, `/download/linux-deb` and `/download/linux-deb-arm64`, which stay put from release to release. The Worker redirects each to the file that `latest.json`, in the R2 bucket `pktito-releases`, names for it, and serves `/download/<version>/<file>` from `<version>/<file>` there, resumable and cached for a year. A key that `latest.json` doesn't name goes to `/soon`.
+The download page links to `/download/macos`, `/download/windows`, `/download/windows-arm64`, `/download/linux-deb` and `/download/linux-deb-arm64`, and to `pktito-cli` alone at `/download/cli-macos`, `/download/cli-linux` and `/download/cli-linux-arm64`; `/download/sha256sums` is the release's checksums. These stay put from release to release. The Worker redirects each to the file that `latest.json`, in the R2 bucket `pktito-releases`, names for it, and serves `/download/<version>/<file>` from `<version>/<file>` there, resumable and cached for a year. A key that `latest.json` doesn't name goes to `/soon`.
 
-Posting a release is its files first, then `latest.json`:
+Posting a release is its files first, then `latest.json`. The CLIs are the release's own: the Mac's taken from the DMG's app, so that the DMG's notarization covers it, and Linux's from the .debs.
 
 ```sh
 npx wrangler@4 r2 object put pktito-releases/0.9.0/pktito_0.9.0_aarch64.dmg --file pktito_0.9.0_aarch64.dmg --remote
@@ -39,7 +39,11 @@ npx wrangler@4 r2 object put pktito-releases/latest.json --file latest.json --co
     "windows": "pktito_0.9.0_x64-setup.exe",
     "windows-arm64": "pktito_0.9.0_arm64-setup.exe",
     "linux-deb": "pktito_0.9.0_amd64.deb",
-    "linux-deb-arm64": "pktito_0.9.0_arm64.deb"
+    "linux-deb-arm64": "pktito_0.9.0_arm64.deb",
+    "cli-macos": "pktito-cli-0.9.0-macos-arm64",
+    "cli-linux": "pktito-cli-0.9.0-linux-x86_64",
+    "cli-linux-arm64": "pktito-cli-0.9.0-linux-arm64",
+    "sha256sums": "SHA256SUMS"
   }
 }
 ```

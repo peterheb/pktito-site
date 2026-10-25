@@ -4,7 +4,9 @@
    from the R2 bucket bound as RELEASES:
 
      /download/macos, /download/windows, /download/windows-arm64,
-     /download/linux-deb, /download/linux-deb-arm64
+     /download/linux-deb, /download/linux-deb-arm64; pktito-cli alone,
+     /download/cli-macos, /download/cli-linux, /download/cli-linux-arm64;
+     and the release's checksums, /download/sha256sums
          a redirect to the current release's file, as latest.json names it
      /download/<version>/<file>
          the file, which never changes once posted: cached for a year
@@ -59,6 +61,10 @@ async function latest(request, env, system) {
         "windows-arm64",
         "linux-deb",
         "linux-deb-arm64",
+        "cli-macos",
+        "cli-linux",
+        "cli-linux-arm64",
+        "sha256sums",
       ].includes(system)
     )
       return env.ASSETS.fetch(request);
