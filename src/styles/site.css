@@ -260,6 +260,14 @@
   font: 400 14px/1.6 var(--font-mono);
   overflow-x: auto;
 }
+/* a name that breaks badly, as "x86-64" at its hyphen; and a link to keep
+   reading, a few words and its arrow, on one line: the arrow, an
+   inline-block, wrapped onto a line of its own (the download page,
+   2026-10-25) */
+.nowrap,
+a.pk-link {
+  white-space: nowrap;
+}
 .visually-hidden {
   position: absolute;
   width: 1px;
