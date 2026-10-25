@@ -9,6 +9,10 @@
     "binding": "ASSETS",
     "html_handling": "drop-trailing-slash",
     "not_found_handling": "404-page",
+    // the installers are the Worker's: without this, a browser's click on
+    // /download/macos (Sec-Fetch-Mode: navigate) matched no asset and got
+    // the 404 page, never reaching the Worker, while curl got the file
+    "run_worker_first": ["/download/*"],
   },
   "r2_buckets": [{ "binding": "RELEASES", "bucket_name": "pktito-releases" }],
   // the download counts: `npx wrangler@4 d1 create pktito-stats` gives the id
