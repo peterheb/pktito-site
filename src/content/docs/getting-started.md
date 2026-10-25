@@ -36,7 +36,8 @@ Finished transcripts stay on the start screen's **Recent** list.
 Press Space to play, or click a sentence's time to play from there. The word being spoken is underlined as the transcript follows along.
 
 - **Speed**: < and > change it, from 0.75× to 2×.
+- **Volume**: the speaker after the time mutes; the slider beside it sets the level.
 - **Find**: Ctrl+F (⌘F on a Mac).
-- **Times**: click the time beside the play button to switch between seconds and frames.
+- **Times**: click the time under the waveform to switch between seconds and frames.
 
 [Saving](/docs/saving) covers the formats a transcript can be saved in.

@@ -61,7 +61,7 @@ Lists each model, its size, and whether it is downloaded or in use.
 pktito-cli download parakeet-tdt-0.6b-v2
 ```
 
-Downloads a model for the app and `pktito-cli` both, taking the same names as `-m`. It asks nothing, resumes, retries while the network is away, and prints the model file's path when done.
+Downloads a model for the app and `pktito-cli` both, taking the same names as `-m`. It asks nothing, resumes, and prints the model file's path when done. It goes through the proxy that `HTTPS_PROXY` names, or `ALL_PROXY` (SOCKS too), except for hosts in `NO_PROXY`, as curl does. After 5 failed tries in a row it stops and exits 1, keeping what it has: running it again goes on from there.
 
 The models folder is `models` in the app's data folder:
 

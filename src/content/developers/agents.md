@@ -25,13 +25,14 @@ pktito-cli download parakeet-tdt-0.6b-v2    # once: 624 MB, prints the model's p
 pktito-cli -q --json talk.mp4               # the transcript, as JSON on stdout
 ```
 
-`download` retries while the network is away, so give it a time limit. Use `parakeet-tdt-0.6b-v3` (648 MB) for the 25 European languages. Without `--json`, the output is plain text, one sentence a line.
+`download` goes through the sandbox's `HTTPS_PROXY` or `ALL_PROXY`, and gives up after 5 failed tries in a row, exiting 1; run it again to go on from where it stopped. Use `parakeet-tdt-0.6b-v3` (648 MB) for the 25 European languages. Without `--json`, the output is plain text, one sentence a line.
 
 The JSON's `segments` hold the sentences, each with `start`, `end`, `text` and its `words`; times are in seconds. [pktito-cli](/developers/cli#json-output) has every field and the exit codes.
 
 ## Failures to expect
 
 - `no model yet: … pktito-cli download parakeet-tdt-0.6b-v2`: run that download.
+- `5 tries in a row failed`: the download can't reach models.pktito.net. Check the proxy variables, then run it again.
 - `Install ffmpeg to read audio and video here`: on Linux, install ffmpeg, or convert the file to WAV.
 
 Other messages are explained in [Troubleshooting](/docs/troubleshooting).
