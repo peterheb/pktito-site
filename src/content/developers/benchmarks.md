@@ -10,15 +10,16 @@ AliceBench v1 times pktito transcribing LibriVox's public-domain recording of _A
 
 ## Results
 
-| Machine                                                               | × real time | Whole book | pktito | Backend     | Threads |
-| --------------------------------------------------------------------- | ----------: | ---------: | ------ | ----------- | ------: |
-| Windows Workstation<br><small>16 cores, AMD Ryzen 9 9950X</small>     |       238.8 |       0:45 | 0.9.1  | avx512-vnni |      16 |
-| EC2 c8a.xlarge<br><small>4 cores, AMD EPYC 9R45 (Zen 5)</small>       |       125.9 |       1:25 | 0.9.1  | avx512-vnni |       4 |
-| Mac mini<br><small>12 cores, Apple M4 Pro</small>                     |       123.0 |       1:27 | 0.9.1  | neon-dp     |      12 |
-| Windows Laptop (2021)<br><small>4 cores, Intel Core i7-1185G7</small> |        37.0 |       4:50 | 0.9.1  | avx512-vnni |       4 |
-| Raspberry Pi 5<br><small>4 cores, Cortex-A76, 4 GB</small>            |        14.5 |      12:19 | 0.9.1  | neon-dp     |       4 |
+| Machine                                                                      | × real time | Whole book | pktito | Backend     | Threads |
+| ---------------------------------------------------------------------------- | ----------: | ---------: | ------ | ----------- | ------: |
+| Windows Workstation<br><small>16 cores, AMD Ryzen 9 9950X</small>            |       238.8 |       0:45 | 0.9.1  | avx512-vnni |      16 |
+| EC2 c8a.xlarge<br><small>4 cores, AMD EPYC 9R45 (Zen 5)</small>              |       125.9 |       1:25 | 0.9.1  | avx512-vnni |       4 |
+| Mac mini<br><small>12 cores, Apple M4 Pro</small>                            |       123.0 |       1:27 | 0.9.1  | neon-dp     |      12 |
+| ThinkPad P14s Gen 5 (2024)<br><small>8 cores, AMD Ryzen 7 PRO 8840HS</small> |        58.6 |       3:03 | 0.9.1  | avx512-vnni |       8 |
+| Windows Laptop (2021)<br><small>4 cores, Intel Core i7-1185G7</small>        |        37.0 |       4:50 | 0.9.1  | avx512-vnni |       4 |
+| Raspberry Pi 5<br><small>4 cores, Cortex-A76, 4 GB</small>                   |        14.5 |      12:19 | 0.9.1  | neon-dp     |       4 |
 
-Run October 24, 2026; every run matched all 12 reference transcripts. The Mac mini was in use at the time. The laptop is a Surface Pro 8, plugged in, in the Balanced power mode.
+Run October 24, 2026; every run matched all 12 reference transcripts. The Mac mini was in use at the time. The Windows laptop is a Surface Pro 8, plugged in, in the Balanced power mode; the ThinkPad, a mobile workstation, was plugged in, in the Best performance mode.
 
 ## Run it
 
