@@ -478,8 +478,9 @@ a.pk-link {
 .prose td code {
   white-space: nowrap;
 }
-/* a SHA-256 breaks where it must rather than scroll its table */
-.prose td code.hash {
+/* a long code value (a SHA-256, a path) breaks where it must rather than
+   scroll its table */
+.prose td code.wrap {
   white-space: normal;
   overflow-wrap: anywhere;
 }

@@ -8,38 +8,36 @@ order: 1
 
 ## Getting it on the PATH
 
-It comes with the app.
+The CLI is installed with the desktop application as `pktito-cli`:
 
 - **Windows**: the installer adds it to the PATH; open a new terminal after installing.
 - **Linux**: the .deb installs it in `/usr/bin`.
 - **macOS**: choose **Install Command Line Tool…** from the pktito menu, which links it into `/usr/local/bin`. Until then it is at `/Applications/pktito.app/Contents/MacOS/pktito-cli`.
 
-Without the app, `pktito-cli` alone is a download for macOS and Linux: see [For AI agents](/developers/agents#install).
+For headless servers or sandboxes, `pktito-cli` can be downloaded separately for macOS and Linux: see [For AI agents](/developers/agents#install).
 
 ## Usage
 
 ```sh
-pktito-cli talk.mp4                      # the transcript, on the terminal
-pktito-cli --srt *.mp4                   # subtitles beside each file
-pktito-cli -m multilingual -f json -o out interview.m4a
-pktito-cli models                        # which are here, which is in use
 pktito-cli download parakeet-tdt-0.6b-v3
+pktito-cli talk.mp4      # outputs sentences to terminal
+pktito-cli --srt *.mp4   # subtitles beside each file
+pktito-cli -m multilingual -f json -o out interview.m4a
+pktito-cli models        # which are here, which is in use
 ```
 
 ## Options
 
-| Option                | Effect                                                                                                                                                                                   |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `-m`, `--model MODEL` | A model's name (`parakeet-tdt-0.6b-v2`), its label (`english`, `multilingual`), the last part of its name (`v2`, `v3`), or the path to a `.pkf`. A named model must be downloaded first. |
-| `-f`, `--format F`    | `txt`, `md`, `srt`, `vtt` or `json`. `--txt`, `--md`, `--srt`, `--vtt` and `--json` are the same.                                                                                        |
-| `--times`             | Each sentence's start time before it, in `txt` and `md`.                                                                                                                                 |
-| `-o`, `--output PATH` | For one file, the file to write. For several, or a PATH that is a folder or ends in `/`, the folder to write into, made if it isn't there.                                               |
-| `-t`, `--threads N`   | Threads to use. The default is one a core, or `PKTITO_THREADS` when it is set.                                                                                                           |
-| `-q`, `--quiet`       | No progress, and no line naming each file written. Progress only shows on a terminal anyway.                                                                                             |
-| `-h`, `--help`        | The usage text.                                                                                                                                                                          |
-| `--version`           | `pktito-cli` and its version.                                                                                                                                                            |
-
-[Saving](/docs/saving) says what each format holds.
+| Option                | Effect                                                                                                                                         |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-m`, `--model MODEL` | A model's name (`parakeet-tdt-0.6b-v2`), its label (`english`, `multilingual`), the last part of its name (`v2`, `v3`), or the path to a `.pkf`. |
+| `-f`, `--format F`    | `txt`, `md`, `srt`, `vtt` or `json`. `--txt`, `--md`, `--srt`, `--vtt` and `--json` are the same.                                              |
+| `--times`             | Include timestamps when outputting `txt` and `md`.                                                                                             |
+| `-o`, `--output PATH` | For one file, the file to write. For several, or a PATH that is a folder or ends in `/`, the folder to write into.                             |
+| `-t`, `--threads N`   | Threads to use. The default is usually optimal, but on some machines, specifically setting the thread count improves performance.              |
+| `-q`, `--quiet`       | Do not output progress updates.                                                                                                                |
+| `-h`, `--help`        | Display the usage text.                                                                                                                        |
+| `--version`           | `pktito-cli` and its version.                                                                                                                  |
 
 ## Where transcripts go
 
@@ -47,7 +45,13 @@ pktito-cli download parakeet-tdt-0.6b-v3
 - **Several files, no `-o`**: each transcript is written beside its file, as `talk.txt` for `talk.mp4`.
 - **With `-o`**: to that file, or into that folder.
 
-Nothing is written over: a second `talk.txt` becomes `talk 2.txt`. Errors go to standard error. `pktito-cli` reads files, not standard input.
+Transcripts are never overwritten; a second `talk.txt` becomes `talk 2.txt`.
+
+`pktito-cli` uses the standard streams like this:
+
+- **stdin**: not used (`pktito-cli` only reads files)
+- **stdout**: single-file output
+- **stderr**: status messages
 
 ## models
 
@@ -63,7 +67,7 @@ Lists each model, its size, and whether it is downloaded or in use.
 pktito-cli download parakeet-tdt-0.6b-v2
 ```
 
-Downloads a model for the app and `pktito-cli` both, taking the same names as `-m`. It asks nothing, resumes, and prints the model file's path when done. It goes through the proxy that `HTTPS_PROXY` names, or `ALL_PROXY` (SOCKS too), except for hosts in `NO_PROXY`, as curl does. After 5 failed tries in a row it stops and exits 1, keeping what it has: running it again goes on from there.
+Downloads a model for the app and `pktito-cli` both, taking the same names as `-m`. Supports standard proxy servers (`HTTPS_PROXY`, `ALL_PROXY`, including SOCKS).
 
 The models folder is `models` in the app's data folder:
 
@@ -118,30 +122,21 @@ Times are in seconds, to the millisecond.
 pktito-cli bench recordings/
 ```
 
-Times the transcription of each file, or of a folder's audio and video, and gives the total as times real time. Decoding the file isn't counted. It takes `-m`, `-t`, `-q` and `--json`. Its first lines name the backend the CPU picked and the compiler that built the engine: the speed depends on both, the transcript on neither.
+Times the transcription of each file, or of a folder's audio and video, and gives the total as times real time. Decoding the file isn't counted. It takes `-m`, `-t`, `-q` and `--json`. Its first lines name the backend the CPU picked and the compiler that built the engine.
 
-`--json` gives `pktito_cli`, `model`, `backend`, `compiler`, `threads`, `audio_s`, `seconds` and `x_real_time` for the whole, and `files`, each with `file`, `audio_s`, `seconds`, `x_real_time` and `transcript_sha256`. [AliceBench](/developers/benchmarks) is built on it.
+`--json` outputs the benchmark results as JSON on standard output, to redirect to a `.json` file. [AliceBench](/developers/benchmarks) is built on it.
 
 ### Finding the fastest thread count
 
 By default pktito uses a thread for each core. On a chip with two kinds of core, such as Intel's performance and efficiency cores or an Arm chip's big and little ones, it also times the fast cores alone against all of them early in the first long recording, and keeps whichever was quicker. That choice is a quick guess. Hyperthreading, other work on the machine, or a close race can make it pick the slower one.
 
-If you will transcribe a lot on one machine, bench a few of your own files at the default, then at a few fixed thread counts, and keep the fastest:
+If you will transcribe a lot on one machine, look up your CPU's architecture and try benchmarking with the thread count fixed at a few key values: the number of full cores (vs. threads), the number of fast cores (vs. efficiency cores), or the count of all cores (fast and slow).
 
 ```sh
-pktito-cli bench recordings/          # the default
-pktito-cli bench -t 8 recordings/     # e.g. the number of performance cores
-pktito-cli bench -t 12 recordings/
+pktito-cli bench recordings/         # the default
+pktito-cli bench -t 8 recordings/    # e.g. the fast cores
+pktito-cli bench -t 12 recordings/   # e.g. all cores
 ```
-
-Then pass `-t` when you transcribe, or set `PKTITO_THREADS`, which `pktito-cli` and the app both read. The transcript is the same at any thread count; only the speed changes.
-
-## Choosing the decoder
-
-`PKTITO_DECODER` overrides how files are read, for `pktito-cli` and the app:
-
-- `PKTITO_DECODER=ffmpeg` reads everything through ffmpeg.
-- `PKTITO_DECODER=os` uses the system's media support alone: not pktito's own WAV and AIFF reader, and never ffmpeg.
 
 ## Exit codes
 
@@ -151,7 +146,7 @@ Then pass `-t` when you transcribe, or set `PKTITO_THREADS`, which `pktito-cli` 
 | 1    | Something failed; standard error says what. |
 | 2    | No arguments; it prints the usage.          |
 
-With several files, one failure doesn't stop the rest: it's reported as `pktito-cli: talk.mp4: File not found`, and the exit code is 1.
+With several files, one failure doesn't stop the rest.
 
 ## In scripts
 
@@ -172,3 +167,15 @@ In PowerShell:
 pktito-cli -q --srt (Get-ChildItem recordings\*.mp4).FullName
 if ($LASTEXITCODE) { Write-Error "some files failed" }
 ```
+
+## Environment variables
+
+A command-line option takes precedence over its variable (`-t` over `PKTITO_THREADS`).
+
+| Variable                                               | Effect                                                                                                                                  |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `PKTITO_THREADS`                                       | Threads to use, as `-t`. The app reads it too.                                                                                          |
+| `PKTITO_DECODER`                                       | `ffmpeg` reads every file through ffmpeg; `os` uses the system's media support alone, never pktito's WAV and AIFF reader or ffmpeg. The app reads it too. |
+| `HTTPS_PROXY`, `HTTP_PROXY`, `ALL_PROXY`, `NO_PROXY`   | The proxy for `download`, read as curl reads them, in either case. `ALL_PROXY` can be SOCKS.                                            |
+| `PKTITO_MODEL_BASE`                                    | Where `download` gets models, in place of `https://models.pktito.net`: a mirror with the same layout.                                   |
+| `PKTITO_KERNELS`                                       | Forces a compute backend (`ref`, `neon`, `neon-dp`, `avx2`, `avx2-vnni`, `avx512-vnni`, `amx-int8`), for comparing them; the CPU picks one otherwise. |

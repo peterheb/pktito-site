@@ -21,8 +21,8 @@ pktito checks each download against these.
 
 | File                     | SHA-256                                                                               |
 | ------------------------ | ------------------------------------------------------------------------------------- |
-| parakeet-tdt-0.6b-v2.pkf | <code class="hash">8bfa6750b83cd7c447bad82057c7a12473563b72b3d35487fcca6da0786d83c7</code> |
-| parakeet-tdt-0.6b-v3.pkf | <code class="hash">35a59c9a433d4da2289640db93e73c42478b576e49a293090ef61b4ae595152a</code> |
+| parakeet-tdt-0.6b-v2.pkf | <code class="wrap">8bfa6750b83cd7c447bad82057c7a12473563b72b3d35487fcca6da0786d83c7</code> |
+| parakeet-tdt-0.6b-v3.pkf | <code class="wrap">35a59c9a433d4da2289640db93e73c42478b576e49a293090ef61b4ae595152a</code> |
 
 ## Using a model file you already have
 

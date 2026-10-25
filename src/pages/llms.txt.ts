@@ -1,6 +1,6 @@
 // pktito.net/llms.txt: what an agent needs to know about pktito, in the
-// llmstxt.org shape, with the docs' pages linked as Markdown-ish text
-// (llms-full.txt has them whole).
+// llmstxt.org shape, with the docs' pages linked as their Markdown (each
+// page's address and .md; llms-full.txt has them whole).
 import { getCollection } from "astro:content";
 import { SECTIONS } from "../lib/site";
 
@@ -16,7 +16,7 @@ export async function GET() {
   for (const key of ["developers", "docs"] as const) {
     const pages = (await getCollection(key)).sort((a, b) => a.data.order - b.data.order);
     out.push(`## ${SECTIONS[key].title}`, "");
-    for (const p of pages) out.push(`- [${p.data.title}](https://pktito.net/${key}/${p.id}): ${p.data.description}`);
+    for (const p of pages) out.push(`- [${p.data.title}](https://pktito.net/${key}/${p.id}.md): ${p.data.description}`);
     out.push("");
   }
   out.push("## Optional", "", "- [Download](https://pktito.net/download): installers for macOS, Windows and Linux, and pktito-cli alone for macOS and Linux", "- [Source](https://github.com/peterheb/pktito): the app and pktito-cli, MIT", "");
