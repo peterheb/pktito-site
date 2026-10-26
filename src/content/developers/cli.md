@@ -14,7 +14,7 @@ The CLI is installed with the desktop application as `pktito-cli`:
 - **Linux**: the .deb installs it in `/usr/bin`.
 - **macOS**: choose **Install Command Line Tool…** from the pktito menu, which links it into `/usr/local/bin`. Until then it is at `/Applications/pktito.app/Contents/MacOS/pktito-cli`.
 
-For headless servers or sandboxes, `pktito-cli` can be downloaded separately for macOS and Linux: see [For AI agents](/developers/agents#install).
+For headless servers or sandboxes, `pktito-cli` can be downloaded separately for macOS, Windows and Linux: see [For AI agents](/developers/agents#install).
 
 ## Usage
 

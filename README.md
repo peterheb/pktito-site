@@ -22,9 +22,9 @@ The design system, the voice included, lives in pktito-app's `design/README.md`.
 
 ## Installers
 
-The download page links to `/download/macos`, `/download/windows`, `/download/windows-arm64`, `/download/linux-deb` and `/download/linux-deb-arm64`, and to `pktito-cli` alone at `/download/cli-macos`, `/download/cli-linux` and `/download/cli-linux-arm64`; `/download/sha256sums` is the release's checksums. These stay put from release to release. The Worker redirects each to the file that `latest.json`, in the R2 bucket `pktito-releases`, names for it, and serves `/download/<version>/<file>` from `<version>/<file>` there, resumable and cached for a year. A key that `latest.json` doesn't name goes to `/soon`.
+The download page links to `/download/macos`, `/download/windows`, `/download/windows-arm64`, `/download/linux-deb` and `/download/linux-deb-arm64`, and to `pktito-cli` alone at `/download/cli-macos`, `/download/cli-windows`, `/download/cli-windows-arm64`, `/download/cli-linux` and `/download/cli-linux-arm64`; `/download/sha256sums` is the release's checksums. The Windows CLIs are what the setup programs install, byte for byte; winget installs them from their `/download/<version>/<file>` addresses, which its manifests pin by SHA-256. These stay put from release to release. The Worker redirects each to the file that `latest.json`, in the R2 bucket `pktito-releases`, names for it, and serves `/download/<version>/<file>` from `<version>/<file>` there, resumable and cached for a year. A key that `latest.json` doesn't name goes to `/soon`.
 
-Posting a release is its files first, then `latest.json`. The CLIs are the release's own: the Mac's taken from the DMG's app, so that the DMG's notarization covers it, and Linux's from the .debs.
+Posting a release is its files first, then `latest.json`. The CLIs are the release's own: the Mac's taken from the DMG's app, so that the DMG's notarization covers it, Linux's from the .debs, and Windows' from the signed setup programs. A posted file never changes, the checksums included: a file added to a release later gets a checksums file of its own name that lists the whole release, which `latest.json` then names (0.9.2's Windows CLIs went into `SHA256SUMS-2`).
 
 ```sh
 npx wrangler@4 r2 object put pktito-releases/0.9.0/pktito_0.9.0_aarch64.dmg --file pktito_0.9.0_aarch64.dmg --remote
