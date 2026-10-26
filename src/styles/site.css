@@ -124,6 +124,10 @@
 .shot .dark {
   display: none;
 }
+/* an image the script gave no picture: without JavaScript, the noscript's show */
+.shot > img:not([src]) {
+  display: none !important;
+}
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .shot .light {
     display: none;

@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Arrow from "../components/Arrow.astro";
 import { GITHUB, LIBRARY } from "../lib/site";
+import { existsSync, readFileSync } from "node:fs";
 // AliceBench v1, October 2026 (ALICEBENCH.md in pktito-app): times real
 // time, the book's 10,731 s over each. A machine's kind, then its cores and
 // CPU.
@@ -13,6 +14,29 @@ const SPEED = [
   ["Raspberry Pi 5", "4 cores, Cortex-A76, 4 GB", 14.5, "12 min 19 s"],
 ];
 const top = SPEED[0][2];
+
+// The app's standard shot on each system (pktito-app's design/README.md,
+// "Imagery"), each the size its PNG says. The script after the figure gives
+// a visitor their own system's: iPhone and iPad the Mac's, Android the
+// Windows one, ChromeOS the Linux one, and the Mac's where a system's shots
+// aren't here yet. A system's shots show up when `npm run sync` brings them.
+const SYSTEMS = { mac: "on a Mac", windows: "on Windows", linux: "on Linux" };
+const ABOUT = "showing the transcript of chapter 1 of Alice's Adventures in Wonderland, each sentence beside its time.";
+const png = (f) => {
+  const b = readFileSync(f);
+  return { w: b.readUInt32BE(16), h: b.readUInt32BE(20) };
+};
+const shots = {};
+for (const [os, on] of Object.entries(SYSTEMS)) {
+  const file = (t) => `public/screenshots/${os}-${t}.png`;
+  if (!existsSync(file("light")) || !existsSync(file("dark"))) continue;
+  shots[os] = {
+    ...png(file("light")),
+    light: { src: `/screenshots/${os}-light.png`, alt: `The pktito window ${on}, ${ABOUT}` },
+    dark: { src: `/screenshots/${os}-dark.png`, alt: `The pktito window ${on} in dark mode, ${ABOUT}` },
+  };
+}
+const mac = shots.mac;
 ---
 <Base title="pktito: speech to text on your computer" description="pktito transcribes audio and video on your computer, for macOS, Windows and Linux. Free and open source.">
   <main>
@@ -28,9 +52,26 @@ const top = SPEED[0][2];
         <p class="platforms">Open source for macOS, Windows and Linux.</p>
       </div>
       <figure class="shot">
-        <img class="light" src="/screenshots/mac-light.png" width="792" height="912" alt="The pktito window on a Mac, showing the transcript of chapter 1 of Alice's Adventures in Wonderland, each sentence beside its time." />
-        <img class="dark" src="/screenshots/mac-dark.png" width="792" height="912" alt="The pktito window on a Mac in dark mode, showing the transcript of chapter 1 of Alice's Adventures in Wonderland, each sentence beside its time." />
+        <img class="light" width={mac.w} height={mac.h} alt={mac.light.alt} />
+        <img class="dark" width={mac.w} height={mac.h} alt={mac.dark.alt} />
+        <noscript><img class="light" src={mac.light.src} width={mac.w} height={mac.h} alt={mac.light.alt} /><img class="dark" src={mac.dark.src} width={mac.w} height={mac.h} alt={mac.dark.alt} /></noscript>
       </figure>
+      <script is:inline define:vars={{ shots }}>
+        // the visitor's system, from the platform Chromium names or the user
+        // agent everyone sends; Android before Linux, whose name its agent holds
+        {
+          const say = ((navigator.userAgentData && navigator.userAgentData.platform) || "") + " " + navigator.userAgent;
+          const os = /Android/i.test(say) ? "windows" : /iPhone|iPad|iPod|Mac/i.test(say) ? "mac" : /Win/i.test(say) ? "windows" : /Linux|X11|CrOS|Chrome OS/i.test(say) ? "linux" : "mac";
+          const s = shots[os] || shots.mac;
+          for (const img of document.querySelectorAll(".shot > img")) {
+            const t = img.classList.contains("dark") ? s.dark : s.light;
+            img.width = s.w;
+            img.height = s.h;
+            img.alt = t.alt;
+            img.src = t.src;
+          }
+        }
+      </script>
     </section>
 
     <div class="band-surface">
