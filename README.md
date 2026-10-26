@@ -59,4 +59,4 @@ npx wrangler@4 d1 execute pktito-stats --remote --command \
 
 ## Models and screenshots
 
-models.pktito.net and the screenshots are pktito-app's: its `site/README.md` says how the models are hosted and uploaded, and how the screenshots are taken.
+models.pktito.net and the screenshots are pktito-app's: its README ("The model") says how the models are hosted and uploaded, and its `design/README.md` ("Imagery") how the screenshots are taken.

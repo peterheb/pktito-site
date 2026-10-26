@@ -28,5 +28,5 @@ for (const f of readdirSync(join(app, "ui/fonts")))
 copy("ui/mascot.js", "public/mascot/mascot.js");
 copy("ui/mascot-model.js", "public/mascot/mascot-model.js");
 mkdirSync("public/screenshots", { recursive: true });
-for (const f of readdirSync(join(app, "site/screenshots")))
-  if (f.endsWith(".png")) copy(`site/screenshots/${f}`, `public/screenshots/${f}`);
+for (const f of readdirSync(join(app, "design/screenshots")))
+  if (f.endsWith(".png")) copy(`design/screenshots/${f}`, `public/screenshots/${f}`);
