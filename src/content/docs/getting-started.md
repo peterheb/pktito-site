@@ -12,7 +12,8 @@ Download pktito for your system from the [download page](/download).
 | ------- | ----------------------------------------------------------------------- | -------------------------------------------------- |
 | macOS   | macOS 12 or later, Apple silicon                                        | A disk image: drag pktito to Applications.         |
 | Windows | Windows 10 or 11, x64 or Arm64                                          | Installer (.exe) or Microsoft Store (coming soon). |
-| Linux   | glibc 2.34 or later, x86-64 or Arm64.<br/>(Ubuntu 22+, Debian 12+, derivatives) | A .deb file.                               |
+| Linux   | glibc 2.34 or later, x86-64 or Arm64.<br/>(Ubuntu 22+, Debian 12+, derivatives) | A .deb file. pktito opens from the apps menu, or `pktito` in a terminal. |
+| Android | Android 10 or later                                                     | Google Play (coming soon, after a closed beta). |
 
 ## Requirements
 
@@ -30,6 +31,8 @@ On first launch, download the best model for your task from within the app; the 
 ## Transcribe and listen
 
 Drop audio or video files on the window, or click **Choose files…**. The transcript appears as it's made, and several files dropped together are transcribed in turn. Finished transcripts are kept on the start screen under **Recent**.
+
+While pktito transcribes, it keeps your computer from going to sleep on its own, and lets it sleep again when it's done. The screen can still turn off, and closing the lid still puts the computer to sleep.
 
 Press Space to play the recording, or click a sentence's time to play from there. The word being spoken is underlined as it plays.
 

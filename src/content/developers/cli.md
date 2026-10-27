@@ -142,11 +142,12 @@ pktito-cli bench -t 12 recordings/   # e.g. all cores
 
 | Code | When                                        |
 | ---- | ------------------------------------------- |
-| 0    | Success.                                    |
+| 0    | Success; with no arguments, the usage.      |
 | 1    | Something failed; standard error says what. |
-| 2    | No arguments; it prints the usage.          |
 
 With several files, one failure doesn't stop the rest.
+
+While it transcribes or times files, pktito-cli keeps the computer from going to sleep on its own, and lets it sleep again when it's done. On Linux that's systemd's sleep lock, which a terminal on the desktop gets and a login over ssh doesn't.
 
 ## In scripts
 
