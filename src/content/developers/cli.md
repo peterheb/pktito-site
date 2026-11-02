@@ -97,7 +97,8 @@ The models folder is `models` in the app's data folder:
       ]
     }
   ],
-  "captions": [{ "start": 0, "end": 1.5, "lines": ["Hello there."] }]
+  "captions": [{ "start": 0, "end": 1.5, "lines": ["Hello there."] }],
+  "windows": [{ "start": 0, "end": 29.7, "gap": null, "first_word": 0, "words": 2 }]
 }
 ```
 
@@ -113,6 +114,10 @@ The models folder is `models` in the app's data folder:
 | `captions`                 | The subtitle track's cues, the ones `srt` and `vtt` write.                               |
 | `captions[].start`, `.end` | When the cue is shown and hidden, in seconds.                                            |
 | `captions[].lines`         | The cue's text, as its one or two lines.                                                 |
+| `windows`                  | The stretches the recording was transcribed in, at most 30 seconds each, cut at pauses. Only `pktito-cli` writes them; they show where a cut fell. |
+| `windows[].start`, `.end`  | The stretch whose words are its own, in seconds.                                         |
+| `windows[].gap`            | The silence left out before the next stretch, in seconds; `null` for the last.           |
+| `windows[].first_word`, `.words` | Its words: the first, counted from 0 across all the segments' words, and how many. A sentence that runs across a cut has words in two. |
 
 Times are in seconds, to the millisecond.
 
