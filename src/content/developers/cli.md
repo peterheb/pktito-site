@@ -36,6 +36,7 @@ pktito-cli models        # which are here, which is in use
 | `-o`, `--output PATH` | For one file, the file to write. For several, or a PATH that is a folder or ends in `/`, the folder to write into.                             |
 | `-t`, `--threads N`   | Threads to use. The default is usually optimal, but on some machines, specifically setting the thread count improves performance.              |
 | `-q`, `--quiet`       | Do not output progress updates.                                                                                                                |
+| `--cpu`               | On a Mac with Apple silicon, run on the CPU instead of the Neural Engine. It needs the model file for the CPU (`download --cpu`).               |
 | `-h`, `--help`        | Display the usage text.                                                                                                                        |
 | `--version`           | `pktito-cli` and its version.                                                                                                                  |
 
@@ -68,6 +69,8 @@ pktito-cli download parakeet-tdt-0.6b-v2
 ```
 
 Downloads a model for the app and `pktito-cli` both, taking the same names as `-m`. Supports standard proxy servers (`HTTPS_PROXY`, `ALL_PROXY`, including SOCKS).
+
+On a Mac with Apple silicon it downloads the model's edition for the Neural Engine, two to four times as fast as the CPU; `download --cpu` gets the model file for the CPU instead. [Models](/docs/models#on-a-mac-the-neural-engine-edition) has both.
 
 The models folder is `models` in the app's data folder:
 
@@ -127,7 +130,9 @@ Times are in seconds, to the millisecond.
 pktito-cli bench recordings/
 ```
 
-Times the transcription of each file, or of a folder's audio and video, and gives the total as times real time. Decoding the file isn't counted. It takes `-m`, `-t`, `-q` and `--json`. Its first lines name the backend the CPU picked and the compiler that built the engine.
+Times the transcription of each file, or of a folder's audio and video, and gives the total as times real time. Decoding the file isn't counted. It takes `-m`, `-t`, `-q`, `--cpu` and `--json`. Its first lines name the backend the CPU picked, the compiler that built the engine, and on a Mac whether the Neural Engine ran it.
+
+`--ref DIR` compares each file's transcript with `DIR/NAME.txt`, NAME being the file's name without its extension: identical, or by its word error rate and its character edits.
 
 `--json` outputs the benchmark results as JSON on standard output, to redirect to a `.json` file. [AliceBench](/developers/benchmarks) is built on it.
 
