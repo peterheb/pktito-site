@@ -19,6 +19,6 @@ export async function GET() {
     for (const p of pages) out.push(`- [${p.data.title}](https://pktito.net/${key}/${p.id}.md): ${p.data.description}`);
     out.push("");
   }
-  out.push("## Optional", "", "- [Download](https://pktito.net/download): installers for macOS, Windows and Linux, and pktito-cli alone for macOS, Windows and Linux", "- [Source](https://github.com/peterheb/pktito): the app and pktito-cli, MIT", "");
+  out.push("## Optional", "", "- [Download](https://pktito.net/download): installers for macOS, Windows and Linux, the Microsoft Store (https://apps.microsoft.com/detail/9MW58B2T1ZVW), and pktito-cli alone for macOS, Windows and Linux", "- [Source](https://github.com/peterheb/pktito): the app and pktito-cli, MIT", "");
   return new Response(out.join("\n"), { headers: { "content-type": "text/plain; charset=utf-8" } });
 }

@@ -391,6 +391,16 @@
   }
 }
 
+/* Microsoft's own badge (get.microsoft.com), as its guidelines ask: unaltered */
+.store-badge {
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: var(--space-2);
+}
+.store-badge img {
+  display: block;
+}
+
 /* the download page's release line and notes */
 .release {
   font: 400 15px/1.4 var(--font-mono);

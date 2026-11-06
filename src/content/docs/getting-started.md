@@ -11,7 +11,7 @@ Download pktito for your system from the [download page](/download).
 | System  | Needs                                                                   | Installer                                          |
 | ------- | ----------------------------------------------------------------------- | -------------------------------------------------- |
 | macOS   | macOS 12 or later, Apple silicon                                        | A disk image: drag pktito to Applications.         |
-| Windows | Windows 10 or 11, x64 or Arm64                                          | Installer (.exe) or Microsoft Store (coming soon). |
+| Windows | Windows 10 or 11, x64 or Arm64                                          | Installer (.exe) or [Microsoft Store](https://apps.microsoft.com/detail/9MW58B2T1ZVW), which updates automatically. |
 | Linux   | glibc 2.34 or later, x86-64 or Arm64.<br/>(Ubuntu 22+, Debian 12+, derivatives) | A .deb file. pktito opens from the apps menu, or `pktito` in a terminal. |
 | Android | Android 10 or later                                                     | Google Play (coming soon, after a closed beta). |
 
