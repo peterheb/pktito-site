@@ -66,6 +66,7 @@ export const MACHINES: Machine[] = [
     name: "Galaxy S24 Ultra",
     about: "8 cores, Snapdragon 8 Gen 3",
     accel: { kind: "NPU", x: 195.6, path: "NPU" },
+    cpu: { x: 25.8, path: "neon-dp", threads: 8 },
   },
   { id: "c8a", name: "EC2 c8a.xlarge", about: "4 cores, AMD EPYC 9R45 (Zen 5)", cpu: { x: 128.4, path: "avx512-vnni", threads: 4 } },
   { id: "thinkpad", name: "ThinkPad P14s Gen 5 (2024)", about: "8 cores, AMD Ryzen 7 PRO 8840HS", cpu: { x: 110.1, path: "avx512-vnni", threads: 8 } },
