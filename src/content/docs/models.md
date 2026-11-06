@@ -21,8 +21,8 @@ On a Mac with Apple silicon, pktito runs each model on the Neural Engine, the AI
 
 | Model        | Files                                                                                                                                                                                                  | Size                               |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------- |
-| English      | [parakeet-tdt-0.6b-v2-slim.pkf](https://models.pktito.net/e582eb76db19/parakeet-tdt-0.6b-v2-slim.pkf), [parakeet-tdt-0.6b-v2-encoder.mlmodelc.aar](https://models.pktito.net/8a11f959618e/parakeet-tdt-0.6b-v2-encoder.mlmodelc.aar) | <span class="nowrap">589 MB</span> |
-| Multilingual | [parakeet-tdt-0.6b-v3-slim.pkf](https://models.pktito.net/169ead8b6b98/parakeet-tdt-0.6b-v3-slim.pkf), [parakeet-tdt-0.6b-v3-encoder.mlmodelc.aar](https://models.pktito.net/64cf1a407ada/parakeet-tdt-0.6b-v3-encoder.mlmodelc.aar) | <span class="nowrap">611 MB</span> |
+| English      | [parakeet-tdt-0.6b-v2-slim.pkf](https://models.pktito.net/e582eb76db19/parakeet-tdt-0.6b-v2-slim.pkf), [parakeet-tdt-0.6b-v2-encoder.mlmodelc.aar](https://models.pktito.net/70272da7508a/parakeet-tdt-0.6b-v2-encoder.mlmodelc.aar) | <span class="nowrap">559 MB</span> |
+| Multilingual | [parakeet-tdt-0.6b-v3-slim.pkf](https://models.pktito.net/169ead8b6b98/parakeet-tdt-0.6b-v3-slim.pkf), [parakeet-tdt-0.6b-v3-encoder.mlmodelc.aar](https://models.pktito.net/a7eef40e28b0/parakeet-tdt-0.6b-v3-encoder.mlmodelc.aar) | <span class="nowrap">580 MB</span> |
 
 The first transcription after the download waits several seconds while macOS prepares the encoder for this Mac; later ones start at once.
 
@@ -37,9 +37,9 @@ pktito checks each download against these.
 | parakeet-tdt-0.6b-v2.pkf | <code class="wrap">8bfa6750b83cd7c447bad82057c7a12473563b72b3d35487fcca6da0786d83c7</code> |
 | parakeet-tdt-0.6b-v3.pkf | <code class="wrap">35a59c9a433d4da2289640db93e73c42478b576e49a293090ef61b4ae595152a</code> |
 | parakeet-tdt-0.6b-v2-slim.pkf | <code class="wrap">e582eb76db19e9fba4d9e15d45ce041dd9a230bac3c2970643aa6808bf966acb</code> |
-| parakeet-tdt-0.6b-v2-encoder.mlmodelc.aar | <code class="wrap">8a11f959618e9463386ca9ff5234bec82d535c6a0b1e1b2101cd507c8549297c</code> |
+| parakeet-tdt-0.6b-v2-encoder.mlmodelc.aar | <code class="wrap">70272da7508aff518225caeaea3f0dc7dedb5bf0cc829da72876c9ecae5159a1</code> |
 | parakeet-tdt-0.6b-v3-slim.pkf | <code class="wrap">169ead8b6b98c67676d13c40bd592614f9d1a3b3783da027fe03967cd559b100</code> |
-| parakeet-tdt-0.6b-v3-encoder.mlmodelc.aar | <code class="wrap">64cf1a407ada158ee22450e8f258258373fe8e2ba3ac4ba0f482a91f0c122cdc</code> |
+| parakeet-tdt-0.6b-v3-encoder.mlmodelc.aar | <code class="wrap">a7eef40e28b009fee25548fe869124d2b9ba7be8c00c2dcb1b2e8e8973524571</code> |
 
 ## Using a model file you already have
 
