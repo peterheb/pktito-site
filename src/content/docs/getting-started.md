@@ -26,7 +26,7 @@ pktito supports two NVIDIA speech models:
 - **English** (parakeet-tdt-0.6b-v2)
 - **Multilingual** (parakeet-tdt-0.6b-v3): 25 European languages
 
-On first launch, download the best model for your task from within the app; the one for your system's language is already chosen. If you've downloaded a model before, choose **I already have a model file…** to open it. pktito uses its own `.pkf` file format for speech models; [Models](/docs/models) lists them. On a Mac with Apple silicon, pktito downloads the model's edition for the Neural Engine, which transcribes two to four times as fast as the CPU.
+On first launch, download the best model for your task from within the app; the one for your system's language is already chosen. If you've downloaded a model before, choose **I already have a model file…** to open it. pktito uses its own `.pkf` file format for speech models; [Models](/docs/models) lists them. On a Mac with Apple silicon, pktito downloads the model's edition for the Neural Engine, which transcribes two to five times as fast as the CPU.
 
 ## Transcribe and listen
 

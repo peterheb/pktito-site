@@ -17,7 +17,7 @@ Switch models from the model menu on the start screen.
 
 ## On a Mac: the Neural Engine edition
 
-On a Mac with Apple silicon, pktito runs each model on the Neural Engine, the AI accelerator built into the chip: two to four times as fast as on the CPU, leaving the CPU mostly free. The app and `pktito-cli download` get the model's Neural Engine edition there, in two files: the model without its encoder, and the encoder compiled for Core ML.
+On a Mac with Apple silicon, pktito runs each model on the Neural Engine, the AI accelerator built into the chip: two to five times as fast as on the CPU, leaving the CPU mostly free. The app and `pktito-cli download` get the model's Neural Engine edition there, in two files: the model without its encoder, and the encoder compiled for Core ML.
 
 | Model        | Files                                                                                                                                                                                                  | Size                               |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------- |

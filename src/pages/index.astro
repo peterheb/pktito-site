@@ -2,19 +2,18 @@
 import Base from "../layouts/Base.astro";
 import Arrow from "../components/Arrow.astro";
 import { GITHUB, LIBRARY } from "../lib/site";
+import { RELEASE, machine, spoken } from "../lib/alicebench";
 import { existsSync, readFileSync } from "node:fs";
-// AliceBench v1 on pktito 0.9.5, November 2026 (ALICEBENCH.md in
-// pktito-app): times real time, the book's 10,731 s over each. A machine's
-// kind, then its cores and CPU; a Mac's figure is its Neural Engine's, as
-// the Mac app runs it.
-const SPEED = [
-  ["Mac Studio", "Apple M5 Ultra, Neural Engine", 750.0, "14 s"],
-  ["Mac mini", "Apple M4 Pro, Neural Engine", 386.0, "28 s"],
-  ["Windows Workstation", "16 cores, AMD Ryzen 9 9950X", 361.5, "30 s"],
-  ["EC2 c8a.xlarge", "4 cores, AMD EPYC 9R45 (Zen 5)", 128.7, "1 min 23 s"],
-  ["Windows Laptop (2021)", "4 cores, Intel Core i7-1185G7", 48.9, "3 min 40 s"],
-  ["Raspberry Pi 5", "4 cores, Cortex-A76, 4 GB", 14.1, "12 min 41 s"],
-];
+// AliceBench v1 (src/lib/alicebench.ts, from ALICEBENCH.md in pktito-app):
+// times real time, the book's 10,731 s over each. A machine's kind, then its
+// cores and CPU; a figure is its Neural Engine's or NPU's where it has one,
+// as the app runs it.
+const HOME = ["m4pro", "9950x", "c8a", "surface", "pi5"];
+const SPEED = HOME.map((id) => {
+  const m = machine(id);
+  const r = m.accel ?? m.cpu!;
+  return [m.name, m.accel ? `${m.about.replace(/^\d+ cores, /, "")}, ${m.accel.kind}` : m.about, r.x, spoken(r.x)] as const;
+});
 const top = SPEED[0][2];
 
 // The app's standard shot on each system (pktito-app's design/README.md,
@@ -110,7 +109,7 @@ const mac = shots.mac;
             </div>
           ))}
         </div>
-        <p class="provenance">AliceBench v1, pktito 0.9.5, November 2026. A Mac's speed is on its Neural Engine. <Arrow href="/developers/benchmarks">Run it yourself</Arrow></p>
+        <p class="provenance">AliceBench v1, pktito {RELEASE}, November 2026. A Mac's speed is on its Neural Engine. <Arrow href="/developers/benchmarks">Run it yourself</Arrow></p>
       </section>
     </div>
 
@@ -128,7 +127,7 @@ const mac = shots.mac;
         </div>
         <div>
           <h3>Do I need a GPU?</h3>
-          <p>No. On a Mac with Apple silicon, pktito runs the speech model on the Neural Engine, the AI accelerator built into the chip, two to four times as fast as on its CPU; its transcripts match the CPU's in all but about 6 words in 10,000. Everywhere else it runs entirely on the CPU, with kernels tuned for each processor family. Even a Raspberry Pi 5 transcribes about 14 times faster than real time.</p>
+          <p>No. pktito runs the speech model on the CPU, with kernels tuned for each processor family, or on selected NPUs. On a Mac with Apple silicon it uses the Neural Engine, the AI accelerator built into the chip, two to five times as fast as its CPU. On a Windows PC with a Snapdragon X Elite it uses the chip's NPU, about a third faster than its CPU and leaving the CPU almost idle. Either way, its transcripts match the CPU's in all but about 6 words in 10,000. Even a Raspberry Pi 5 transcribes about 14 times faster than real time.</p>
         </div>
         <div>
           <h3>Is it really free?</h3>

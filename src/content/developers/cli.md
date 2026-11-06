@@ -70,7 +70,7 @@ pktito-cli download parakeet-tdt-0.6b-v2
 
 Downloads a model for the app and `pktito-cli` both, taking the same names as `-m`. Supports standard proxy servers (`HTTPS_PROXY`, `ALL_PROXY`, including SOCKS).
 
-On a Mac with Apple silicon it downloads the model's edition for the Neural Engine, two to four times as fast as the CPU; `download --cpu` gets the model file for the CPU instead. [Models](/docs/models#on-a-mac-the-neural-engine-edition) has both.
+On a Mac with Apple silicon it downloads the model's edition for the Neural Engine, two to five times as fast as the CPU; `download --cpu` gets the model file for the CPU instead. [Models](/docs/models#on-a-mac-the-neural-engine-edition) has both.
 
 The models folder is `models` in the app's data folder:
 

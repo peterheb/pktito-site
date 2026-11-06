@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import Docs from "../../layouts/Docs.astro";
+import { PLACEHOLDER, chartHtml } from "../../lib/alicebench";
 
 export async function getStaticPaths() {
   const pages = (await getCollection("developers")).sort((a, b) => a.data.order - b.data.order);
@@ -8,7 +9,11 @@ export async function getStaticPaths() {
 }
 const { entry, pages } = Astro.props;
 const { Content, headings } = await render(entry);
+// a page with the AliceBench chart's placeholder (benchmarks.md) gets the
+// chart, drawn from src/lib/alicebench.ts, in its place
+const html = entry.rendered?.html ?? "";
+const chart = html.includes(PLACEHOLDER) ? html.replace(PLACEHOLDER, chartHtml()) : null;
 ---
 <Docs section="developers" pages={pages} id={entry.id} title={entry.data.title} description={entry.data.description} headings={headings}>
-  <Content />
+  {chart ? <Fragment set:html={chart} /> : <Content />}
 </Docs>
