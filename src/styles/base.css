@@ -157,16 +157,18 @@ code {
 .tile {
   background: var(--surface);
   padding: var(--space-5);
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: var(--space-3);
-  align-content: start;
   min-width: 0;
 }
+/* the buttons on the tile's foot, level across a row of tiles */
 .tile .buttons {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
-  margin-top: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-2);
 }
 @media (max-width: 960px) {
   .tiles {
