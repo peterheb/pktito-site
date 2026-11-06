@@ -78,7 +78,7 @@ export const MACHINES: Machine[] = [
   { id: "thinkpad", name: "ThinkPad P14s Gen 5 (2024)", about: "8 cores, AMD Ryzen 7 PRO 8840HS", cpu: { x: 110.1, path: "avx512-vnni", threads: 8 } },
   { id: "surface", name: "Windows Laptop (2021)", about: "4 cores, Intel Core i7-1185G7", cpu: { x: 51.5, path: "avx512-vnni", threads: 4 } },
   { id: "pi5", name: "Raspberry Pi 5", about: "4 cores, Cortex-A76, 4 GB", cpu: { x: 14.1, path: "neon-dp", threads: 4 } },
-  { id: "pi3", name: "Raspberry Pi 3B+", about: "4 cores, Cortex-A53, 1 GB", cpu: { x: 1.18, path: "neon", threads: 4, seconds: 9136 }, version: "0.9.5" },
+  { id: "pi3", name: "Raspberry Pi 3B+", about: "4 cores, Cortex-A53, 1 GB", cpu: { x: 1.19, path: "neon", threads: 4, seconds: 9003 } },
 ];
 
 export const best = (m: Machine) => Math.max(m.accel?.x ?? 0, m.cpu?.x ?? 0);
