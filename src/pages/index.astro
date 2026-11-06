@@ -8,7 +8,7 @@ import { existsSync, readFileSync } from "node:fs";
 // times real time, the book's 10,731 s over each. A machine's kind, then its
 // cores and CPU; a figure is its Neural Engine's or NPU's where it has one,
 // as the app runs it.
-const HOME = ["m4pro", "9950x", "c8a", "surface", "pi5"];
+const HOME = ["m4pro", "9950x", "s25", "c8a", "surface", "pi5"];
 const SPEED = HOME.map((id) => {
   const m = machine(id);
   const r = m.accel ?? m.cpu!;
@@ -109,7 +109,7 @@ const mac = shots.mac;
             </div>
           ))}
         </div>
-        <p class="provenance">AliceBench v1, pktito {RELEASE}, November 2026. A Mac's speed is on its Neural Engine. <Arrow href="/developers/benchmarks">Run it yourself</Arrow></p>
+        <p class="provenance">AliceBench v1, pktito {RELEASE}, November 2026. A Mac's speed is on its Neural Engine, the Galaxy's on its NPU. <Arrow href="/developers/benchmarks">Run it yourself</Arrow></p>
       </section>
     </div>
 

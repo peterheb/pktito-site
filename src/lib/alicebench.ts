@@ -54,6 +54,19 @@ export const MACHINES: Machine[] = [
     accel: { kind: "NPU", x: 137.9, path: "NPU" },
     cpu: { x: 104.5, path: "neon-dp", threads: 12 },
   },
+  {
+    id: "s25",
+    name: "Galaxy S25 Ultra",
+    about: "8 cores, Snapdragon 8 Elite",
+    accel: { kind: "NPU", x: 229.2, path: "NPU" },
+    cpu: { x: 32.0, path: "neon-dp", threads: 8 },
+  },
+  {
+    id: "s24",
+    name: "Galaxy S24 Ultra",
+    about: "8 cores, Snapdragon 8 Gen 3",
+    accel: { kind: "NPU", x: 195.6, path: "NPU" },
+  },
   { id: "c8a", name: "EC2 c8a.xlarge", about: "4 cores, AMD EPYC 9R45 (Zen 5)", cpu: { x: 128.4, path: "avx512-vnni", threads: 4 } },
   { id: "thinkpad", name: "ThinkPad P14s Gen 5 (2024)", about: "8 cores, AMD Ryzen 7 PRO 8840HS", cpu: { x: 110.1, path: "avx512-vnni", threads: 8 } },
   { id: "surface", name: "Windows Laptop (2021)", about: "4 cores, Intel Core i7-1185G7", cpu: { x: 51.5, path: "avx512-vnni", threads: 4 } },
@@ -95,7 +108,7 @@ export function chartHtml() {
     [2, 5, 20, 50, 200, 500].map((t) => `<i class="ab-grid ab-minor" style="left:${pos(t)}%"></i>`).join("");
   const rows = byBest().map((m) => {
     const marks: string[] = [];
-    const tip = (what: string, r: Run) => `${m.name}, ${m.about}: ${what} ${fmt(r.x)}× real time, the book in ${clock(r.x, r.seconds)}`;
+    const tip = (what: string, r: Run) => `${m.name}, ${m.about}: ${what} ${fmt(r.x)}× real time`;
     if (m.cpu && m.accel) {
       const a = pos(m.cpu.x), b = pos(m.accel.x);
       marks.push(`<i class="ab-seg" style="left:${a}%;width:${(+b - +a).toFixed(2)}%"></i>`);
@@ -103,11 +116,10 @@ export function chartHtml() {
     if (m.cpu) marks.push(`<i class="ab-mk ab-cpu" style="left:${pos(m.cpu.x)}%" title="${esc(tip(`CPU (${m.cpu.path}, ${m.cpu.threads} threads)`, m.cpu))}"></i>`);
     if (m.accel) marks.push(`<i class="ab-mk ab-accel" style="left:${pos(m.accel.x)}%" title="${esc(tip(m.accel.kind, m.accel))}"></i>`);
     const top = m.accel ?? m.cpu!;
-    // under the name: what ran, the book's time, the CPU beside an accelerator
-    const said = [m.accel?.kind, `the book in ${clock(top.x, top.seconds)}`, m.accel && m.cpu && `CPU ${fmt(m.cpu.x)}×`, m.version && `pktito ${m.version}`]
-      .filter(Boolean)
-      .join(" · ");
-    return `<div class="ab-row"><div class="ab-name"><b>${esc(m.name)}</b><span>${esc(m.about)}</span><span>${said}</span></div><div class="ab-track" aria-hidden="true">${grid}${marks.join("")}</div><div class="ab-val"><b>${fmt(top.x)}×</b></div></div>`;
+    // a third line only where there's something to note: the accelerator,
+    // with the CPU beside it, or an earlier release
+    const said = [m.accel?.kind, m.accel && m.cpu && `CPU ${fmt(m.cpu.x)}×`, m.version && `pktito ${m.version}`].filter(Boolean).join(" · ");
+    return `<div class="ab-row"><div class="ab-name"><b>${esc(m.name)}</b><span>${esc(m.about)}</span>${said ? `<span>${said}</span>` : ""}</div><div class="ab-track" aria-hidden="true">${grid}${marks.join("")}</div><div class="ab-val"><b>${fmt(top.x)}×</b></div></div>`;
   });
   const axis = `<div class="ab-row ab-axis" aria-hidden="true"><span></span><div class="ab-scale">${ticks
     .map((t, i) => `<span class="${i === 0 ? "first" : i === ticks.length - 1 ? "last" : ""}" style="left:${pos(t)}%">${t.toLocaleString("en-US")}×</span>`)
