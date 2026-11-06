@@ -4,7 +4,7 @@ description: OpenAI's speech-to-text API on your own server, running pktito on t
 order: 3.5
 ---
 
-pktito-server answers OpenAI's `POST /v1/audio/transcriptions` with [libpktito](/developers/library), on the CPU. It uses only the cores you give it, so it can share a machine with an LLM.
+pktito-server answers OpenAI's `POST /v1/audio/transcriptions` with [libpktito](/developers/library), on the CPU. It uses only the cores you give it, so it can share a machine with an LLM. Source: [github.com/peterheb/pktito-server](https://github.com/peterheb/pktito-server).
 
 ## Run it in Docker
 
@@ -25,7 +25,7 @@ curl -s -H "Authorization: Bearer $(cut -d= -f2 pktito.env)" \
   -F file=@talk.wav 127.0.0.1:8000/v1/audio/transcriptions
 ```
 
-It reads WAV and AIFF. For other formats, mount your own ffmpeg 6.0+ and pass `--ffmpeg`; the server's DOCKER.md shows how.
+It reads WAV and AIFF. For other formats, mount your own ffmpeg 6.0+ and pass `--ffmpeg`; [DOCKER.md](https://github.com/peterheb/pktito-server/blob/main/DOCKER.md) shows how.
 
 ## Or build it
 
@@ -68,4 +68,4 @@ with open("talk.wav", "rb") as f:
     print(client.audio.transcriptions.create(model="parakeet-tdt-0.6b-v2", file=f).text)
 ```
 
-Formats: `json`, `text`, `srt`, `vtt`, `verbose_json`, and `pktito_json`. `stream=true` sends server-sent events. `/health`, `/metrics` (Prometheus) and `/v1/models` are there too. The server's README has the rest.
+Formats: `json`, `text`, `srt`, `vtt`, `verbose_json`, and `pktito_json`. `stream=true` sends server-sent events. `/health`, `/metrics` (Prometheus) and `/v1/models` are there too. [The README](https://github.com/peterheb/pktito-server#readme) has the rest.
