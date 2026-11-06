@@ -244,6 +244,7 @@
   grid-template-columns: max-content minmax(0, 1fr) 4.5em;
   column-gap: var(--space-3);
   row-gap: 0;
+  container-type: inline-size;
 }
 .ab-legend {
   grid-column: 1 / -1;
@@ -365,8 +366,18 @@
   .ab {
     padding: var(--space-3);
   }
-  .ab {
+}
+/* where the names would leave the track under ~180px (the longest about
+   line is ~215px), each name goes above its track, by the chart's own
+   width, since the page's sidebars narrow it at any window size */
+@container (max-width: 540px) {
+  .ab-legend,
+  .ab-row {
+    grid-column: 1 / -1;
+  }
+  .ab-row {
     grid-template-columns: minmax(0, 1fr) 4.5em;
+    column-gap: var(--space-3);
   }
   .ab-row > :first-child {
     grid-column: 1 / -1;
