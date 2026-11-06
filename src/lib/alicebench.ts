@@ -55,6 +55,12 @@ export const MACHINES: Machine[] = [
     cpu: { x: 104.5, path: "neon-dp", threads: 12 },
   },
   {
+    id: "iphone16e",
+    name: "iPhone 16e",
+    about: "6 cores, Apple A18",
+    accel: { kind: "Neural Engine", x: 317.6, path: "Neural Engine" },
+  },
+  {
     id: "s25",
     name: "Galaxy S25 Ultra",
     about: "8 cores, Snapdragon 8 Elite",

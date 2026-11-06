@@ -12,7 +12,7 @@ AliceBench v1 times pktito transcribing LibriVox's public-domain recording of _A
 
 <div data-alicebench></div>
 
-pktito 0.9.6, November 5, 2026 (the Pi 3B+ is 0.9.5). CPU runs match the reference transcripts exactly; the Neural Engine and NPUs are 16–19 words off in 27,137. NPU figures come from the app.
+pktito 0.9.6, November 5, 2026 (the Pi 3B+ is 0.9.5). CPU runs match the reference transcripts exactly; the Neural Engine and NPUs are 16–19 words off in 27,137. NPU and iPhone figures come from the app.
 
 ## Run it
 
