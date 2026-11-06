@@ -49,7 +49,7 @@ docker run -d --name pktito-server --restart unless-stopped --init \
   --max-requests 4 --max-hours 1 --max-upload-mb 128 --ffmpeg /opt/ffmpeg/ffmpeg
 ```
 
-Updating ffmpeg is up to you. [DOCKER.md](https://github.com/peterheb/pktito-server/blob/main/DOCKER.md) says why the `chmod`, and how to update it.
+Ask your agent to explain the parameters, customize this for your setup, and keep things up to date. [DOCKER.md](https://github.com/peterheb/pktito-server/blob/main/DOCKER.md) explains the unusual `chmod`.
 
 ## Or build it
 
