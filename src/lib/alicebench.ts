@@ -129,7 +129,7 @@ export function chartHtml() {
     return `<div class="ab-row"><div class="ab-name"><b>${esc(m.name)}</b><span>${esc(m.about)}</span>${said ? `<span>${said}</span>` : ""}</div><div class="ab-track" aria-hidden="true">${grid}${marks.join("")}</div><div class="ab-val"><b>${fmt(top.x)}×</b></div></div>`;
   });
   const axis = `<div class="ab-row ab-axis" aria-hidden="true"><span></span><div class="ab-scale">${ticks
-    .map((t, i) => `<span class="${i === 0 ? "first" : i === ticks.length - 1 ? "last" : ""}" style="left:${pos(t)}%">${t.toLocaleString("en-US")}×</span>`)
+    .map((t, i) => `<span class="${i === 0 ? "first" : i === ticks.length - 1 ? "last" : ""}" style="left:${pos(t)}%">${t.toLocaleString("en-US")}</span>`)
     .join("")}</div><span></span></div>`;
   const legend = `<div class="ab-legend" aria-hidden="true"><span><i class="ab-k ab-cpu"></i>CPU</span><span><i class="ab-k ab-accel"></i>Neural Engine or NPU</span><span>× real time, log scale</span></div>`;
   return `<figure class="ab" aria-label="AliceBench results by machine, fastest first">${legend}${axis}${rows.join("")}</figure>`;

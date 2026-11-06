@@ -238,9 +238,15 @@
   color: var(--term-ink);
   padding: var(--space-4);
   display: grid;
-  gap: 0;
+  /* one set of columns for every row (subgrid): the names take what the
+     longest needs and the track the rest, so its ticks keep room for
+     their labels where the page's column is narrow */
+  grid-template-columns: max-content minmax(0, 1fr) 4.5em;
+  column-gap: var(--space-3);
+  row-gap: 0;
 }
 .ab-legend {
+  grid-column: 1 / -1;
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2) var(--space-4);
@@ -254,9 +260,9 @@
   gap: var(--space-2);
 }
 .ab-row {
+  grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: 15em minmax(0, 1fr) 4.5em;
-  column-gap: var(--space-3);
+  grid-template-columns: subgrid;
   align-items: center;
   min-height: 44px;
 }
@@ -359,7 +365,7 @@
   .ab {
     padding: var(--space-3);
   }
-  .ab-row {
+  .ab {
     grid-template-columns: minmax(0, 1fr) 4.5em;
   }
   .ab-row > :first-child {
