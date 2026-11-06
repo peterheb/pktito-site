@@ -50,7 +50,7 @@ cd ../pktito-server && cargo build --release
 | `--max-requests N`   | Requests at once (16); more get a 503.              |
 | `--ffmpeg PATH`      | ffmpeg for formats other than WAV and AIFF.         |
 
-Memory: about 600 MB for the model, plus roughly `--max-requests` × (`--max-upload-mb` + 230 MB × `--max-hours`). That's 1.4 GB with the limits above.
+Memory: about 600 MB for the model, plus roughly `--max-requests` × (`--max-upload-mb` + 230 MB × `--max-hours`). About 2 GB in all with the limits above.
 
 ## Beside an LLM
 
