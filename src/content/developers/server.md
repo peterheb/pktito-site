@@ -6,20 +6,11 @@ order: 3.5
 
 pktito-server answers OpenAI's `POST /v1/audio/transcriptions` with NVIDIA's Parakeet models on the CPU, through [libpktito](/developers/library). It is made for a machine that has other work to do, an LLM beside it, say: it takes the cores it is given, and the requests share them. Each answer is the transcript `pktito-cli` gives the same recording.
 
-```sh
-pktito-server -m parakeet-tdt-0.6b-v2.pkf -t 8
-curl -s -F file=@talk.wav localhost:8000/v1/audio/transcriptions
-```
+The easiest way to get it online is Docker: one image for x86-64 and Arm64 Linux, the model mounted from the host, and a key on the API.
 
-```json
-{ "text": "And says, how do I get to Dublin? And the answer that comes back is, ..." }
-```
+## Run it in Docker
 
-It runs on Linux and macOS, on x86-64 and Arm64. Windows is not supported.
-
-## Get it
-
-**In Docker**, for x86-64 or Arm64 Linux. The model stays on the host, mounted read-only, and the API asks for a key:
+Docker pulls the image for the machine's architecture, and libpktito picks its kernels by the CPU when the server starts. Put a model in `models/` ([Models](/docs/models) links both, with their checksums), make a key, and start it:
 
 ```sh
 docker pull ghcr.io/peterheb/pktito-server:0.9.6
@@ -32,14 +23,32 @@ docker run -d --name pktito-server --restart unless-stopped --init \
   --max-requests 4 --max-hours 1 --max-upload-mb 128
 ```
 
-**From source**, beside a clone of libpktito 0.9.6:
+Then check it. `/health` needs no key; a transcription does:
+
+```sh
+curl -s 127.0.0.1:8000/health
+curl -s -H "Authorization: Bearer $(cut -d= -f2 pktito.env)" \
+  -F file=@talk.wav 127.0.0.1:8000/v1/audio/transcriptions
+```
+
+`-p 127.0.0.1:8000:8000` keeps it to this machine. To serve others, publish it on the address they reach the machine at, and keep the key: anyone who can reach that address can send it uploads. The limits keep the container under its 3 GB (Memory, below).
+
+**Formats.** The server reads WAV and AIFF itself. For MP3, M4A, FLAC, Ogg, a browser's WebM or a video's sound, give it an ffmpeg, 6.0 or later: the image has none, so the build and its updates stay yours. Mount a self-contained one, such as BtbN's FFmpeg-Builds, with `-v "$PWD/ffmpeg:/opt/ffmpeg:ro"` and add `--ffmpeg /opt/ffmpeg/ffmpeg`. Each upload gets its own ffmpeg, with no network address or path to open, no key in its environment, and limits on its memory and time. The server's DOCKER.md has the commands.
+
+## Or build it
+
+From source, on Linux or macOS, beside a clone of libpktito 0.9.6:
 
 ```sh
 cd libpktito && make libpktito.a
 cd ../pktito-server && cargo build --release
 ```
 
-**The model** is one `.pkf` file: [Models](/docs/models) links both, with their checksums. The server reads WAV and AIFF itself; for MP3, MP4, FLAC and the rest, give it ffmpeg 6.0 or later with `--ffmpeg PATH`.
+```sh
+./target/release/pktito-server -m parakeet-tdt-0.6b-v2.pkf -t 8
+```
+
+The server reads WAV and AIFF itself; for MP3, MP4, FLAC and the rest, give it ffmpeg 6.0 or later with `--ffmpeg PATH`.
 
 ## Run it
 
