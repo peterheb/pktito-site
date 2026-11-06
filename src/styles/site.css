@@ -440,6 +440,43 @@
   font: 400 14px/1.6 var(--font-mono);
   overflow-x: auto;
 }
+/* a code block's copy button: quiet until the block is pointed at */
+.codebox {
+  position: relative;
+}
+.codebox pre {
+  padding-right: 48px;
+}
+.copy {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--term-dim);
+  opacity: 0.55;
+  cursor: pointer;
+}
+.codebox:hover .copy,
+.copy:focus-visible {
+  opacity: 1;
+}
+.copy:hover {
+  color: var(--term-ink);
+}
+.copy svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
 /* a name that breaks badly, as "x86-64" at its hyphen; and a link to keep
    reading, a few words and its arrow, on one line: the arrow, an
    inline-block, wrapped onto a line of its own (the download page,

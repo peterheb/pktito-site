@@ -21,5 +21,40 @@ const { title, description, current = "" } = Astro.props;
     <Header current={current} />
     <slot />
     <Footer />
+    <script is:inline>
+      // a copy button on each code block, in a box of its own so that it
+      // stays put while a wide block scrolls
+      {
+        const copy = '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="5" width="9" height="9"/><path d="M11 5V2H2v9h3"/></svg>';
+        const done = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>';
+        for (const pre of document.querySelectorAll(".prose pre, .faq pre")) {
+          const box = document.createElement("div");
+          box.className = "codebox";
+          pre.replaceWith(box);
+          box.append(pre);
+          const b = document.createElement("button");
+          b.type = "button";
+          b.className = "copy";
+          b.setAttribute("aria-label", "Copy");
+          b.innerHTML = copy;
+          b.addEventListener("click", async () => {
+            const text = pre.innerText.replace(/\n$/, "");
+            try {
+              await navigator.clipboard.writeText(text);
+            } catch {
+              getSelection().selectAllChildren(pre);
+              return;
+            }
+            b.innerHTML = done;
+            b.setAttribute("aria-label", "Copied");
+            setTimeout(() => {
+              b.innerHTML = copy;
+              b.setAttribute("aria-label", "Copy");
+            }, 1500);
+          });
+          box.append(b);
+        }
+      }
+    </script>
   </body>
 </html>
