@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import Docs from "../../layouts/Docs.astro";
 import { PLACEHOLDER, chartHtml } from "../../lib/alicebench";
+import { PLACEHOLDER as BESIDE, chartsHtml } from "../../lib/besidellm";
 
 export async function getStaticPaths() {
   const pages = (await getCollection("developers")).sort((a, b) => a.data.order - b.data.order);
@@ -9,10 +10,15 @@ export async function getStaticPaths() {
 }
 const { entry, pages } = Astro.props;
 const { Content, headings } = await render(entry);
-// a page with the AliceBench chart's placeholder (benchmarks.md) gets the
-// chart, drawn from src/lib/alicebench.ts, in its place
+// a page with a chart's placeholder gets the chart in its place: AliceBench's
+// (benchmarks.md) from src/lib/alicebench.ts, the server's beside an LLM
+// (server.md) from src/lib/besidellm.ts
 const html = entry.rendered?.html ?? "";
-const chart = html.includes(PLACEHOLDER) ? html.replace(PLACEHOLDER, chartHtml()) : null;
+const chart = html.includes(PLACEHOLDER)
+  ? html.replace(PLACEHOLDER, chartHtml())
+  : html.includes(BESIDE)
+    ? html.replace(BESIDE, chartsHtml())
+    : null;
 ---
 <Docs section="developers" pages={pages} id={entry.id} title={entry.data.title} description={entry.data.description} headings={headings}>
   {chart ? <Fragment set:html={chart} /> : <Content />}

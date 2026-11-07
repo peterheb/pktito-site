@@ -2,6 +2,7 @@
 // would rather not read the HTML (llms.txt links these).
 import { getCollection } from "astro:content";
 import { withTable } from "../../lib/alicebench";
+import { withTables } from "../../lib/besidellm";
 
 export async function getStaticPaths() {
   return (await getCollection("developers")).map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
@@ -9,6 +10,6 @@ export async function getStaticPaths() {
 
 export function GET({ props }) {
   const { entry } = props;
-  const md = `# ${entry.data.title}\n\n${entry.data.description}\n\n${withTable(entry.body ?? "").trim()}\n`;
+  const md = `# ${entry.data.title}\n\n${entry.data.description}\n\n${withTables(withTable(entry.body ?? "")).trim()}\n`;
   return new Response(md, { headers: { "content-type": "text/markdown; charset=utf-8" } });
 }

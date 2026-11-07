@@ -8,7 +8,7 @@ pktito-server answers OpenAI's `POST /v1/audio/transcriptions` with [libpktito](
 
 ## Why run it
 
-pktito-server gives a local inference server a speech-to-text endpoint, on CPU cores the LLM leaves idle. It's small: under 1 GB in all at `-t 4`, the 600 MB model included. On one of three DGX Sparks serving GLM-5.3-Flash together, a busy server at `-t 4`, transcribing at 66–70× real time, slowed the LLM's token generation by 1.4% at most. Idle, it costs nothing.
+pktito-server gives a local inference server a speech-to-text endpoint, on CPU cores the LLM leaves idle. It's small: under 1 GB in all at `-t 4`, the 600 MB model included. Beside an LLM on a DGX Spark, at `-t 8`, it transcribes at 123× real time and slows the LLM by 2.3% at most ([details](#performance-beside-an-llm)).
 
 ## Run it in Docker
 
@@ -89,3 +89,26 @@ with open("talk.wav", "rb") as f:
 ```
 
 Formats: `json`, `text`, `srt`, `vtt`, `verbose_json`, and `pktito_json`. `stream=true` sends server-sent events. `/health`, `/metrics` (Prometheus) and `/v1/models` are there too. [The README](https://github.com/peterheb/pktito-server#readme) has the rest.
+
+## Performance beside an LLM
+
+**Use `-t 8` on a DGX Spark that also serves an LLM.** The LLM keeps at least 97.7% of its speed, and pktito transcribes at 123× real time while the LLM generates. A 30-second clip comes back in under half a second.
+
+The rest of what was measured:
+
+- **Idle, or taking a clip now and then, pktito-server costs the LLM nothing.** Its speed stays within its run-to-run variation.
+- **More threads cost the LLM more.** At `-t 20`, every core, the LLM is 4.0% slower serving 1 chat and 6.7% slower serving 8, for 151×.
+- **A generating LLM slows pktito by a quarter to a third.** At `-t 8`, 166× beside an idle LLM becomes 123×.
+
+<div data-besidellm></div>
+
+<div class="specs">
+
+- **Machine:** DGX Spark (GB10, 20 cores), one of three serving GLM-5.3-Flash (NVFP4) on vLLM
+- **pktito:** pktito-server 0.9.6 (the image above), parakeet-tdt-0.6b-v2, WAV input; at `-t N`, N ÷ 2 recordings at once
+- **LLM load:** each chat a one-line prompt for 384 tokens, temperature 0
+- **LLM baseline:** 60.6 tokens/s serving 1 chat, 143.0 serving 8; ±2% and ±3% run to run
+- **30-second clip at `-t 8`:** 0.34 s beside an idle LLM, 0.43 s serving 1 chat, 0.45 s serving 8
+- **Method:** three shuffled rounds per condition, November 7, 2026
+
+</div>
