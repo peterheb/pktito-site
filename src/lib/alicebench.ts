@@ -48,11 +48,11 @@ export const MACHINES: Machine[] = [
   { id: "9950x", name: "Windows Workstation", about: "16 cores, AMD Ryzen 9 9950X", cpu: { x: 353.5, path: "avx512-vnni", threads: 16 } },
   { id: "spark", name: "NVIDIA DGX Spark", about: "20 cores, NVIDIA GB10", cpu: { x: 219.2, path: "neon-sve", threads: 20 } },
   {
-    id: "vivobook",
-    name: "Vivobook S 15 (2024)",
-    about: "12 cores, Snapdragon X Elite",
-    accel: { kind: "NPU", x: 137.9, path: "NPU" },
-    cpu: { x: 104.5, path: "neon-dp", threads: 12 },
+    id: "omnibook",
+    name: "OmniBook 5 16 (2026)",
+    about: "12 cores, Snapdragon X2 Elite",
+    accel: { kind: "NPU", x: 221.3, path: "NPU" },
+    cpu: { x: 94.0, path: "neon-sve", threads: 12 },
   },
   {
     id: "iphone16e",
