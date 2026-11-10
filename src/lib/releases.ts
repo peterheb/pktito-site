@@ -8,6 +8,16 @@ export type Release = { version: string; date: string; notes: string[] };
 
 export const RELEASES: Release[] = [
   {
+    version: "0.9.7",
+    date: "November 10, 2026",
+    notes: [
+      "Mac on macOS 12 to 14: no longer quits when it transcribes; it runs on the CPU.",
+      "Faster on Snapdragon PCs and phones and on the Raspberry Pi 5.",
+      "Faster on Intel and AMD processors with AVX-512 or AVX-VNNI.",
+      "Manage models: Update gets a newer build of a model.",
+    ],
+  },
+  {
     version: "0.9.6",
     date: "November 5, 2026",
     notes: [
