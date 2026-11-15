@@ -82,47 +82,70 @@ The models folder is `models` in the app's data folder:
 
 ## JSON output
 
-`-f json` writes one object:
+`-f json` writes one object, `pktito/1`, the format pktito-c's `--json` and the apps' JSON write too. From a minute of two people talking, with `--speakers`, shortened:
 
 ```json
 {
-  "file": "talk.mp4",
-  "duration": 63,
+  "format": "pktito/1",
+  "file": "conversation.wav",
+  "duration": 60,
   "model": "parakeet-tdt-0.6b-v2",
+  "language": "en",
+  "diarizer": "Nemotron-3-Diarization",
+  "speakers": [
+    { "id": 1, "name": "Speaker 1" },
+    { "id": 2, "name": "Speaker 2" }
+  ],
   "segments": [
     {
-      "start": 0,
-      "end": 0.9,
-      "text": "Hello there.",
+      "start": 21.793,
+      "end": 24.513,
+      "speaker": 1,
+      "text": "Stuff it into you, his belly counselled him.",
       "words": [
-        { "start": 0, "end": 0.4, "text": "Hello" },
-        { "start": 0.4, "end": 0.9, "text": "there." }
+        { "word": "Stuff", "start": 21.793, "end": 22.193 },
+        { "word": "it", "start": 22.193, "end": 22.353 }
       ]
     }
   ],
-  "captions": [{ "start": 0, "end": 1.5, "lines": ["Hello there."] }],
-  "windows": [{ "start": 0, "end": 29.7, "gap": null, "first_word": 0, "words": 2 }]
+  "captions": [
+    {
+      "start": 21.793,
+      "end": 25.013,
+      "speaker": 1,
+      "lines": ["Speaker 1: Stuff it into you,", "his belly counselled him."]
+    }
+  ],
+  "chunks": [
+    { "start": 0.273, "end": 24.832, "gap": 0, "first_word": 0, "words": 54 }
+  ]
 }
 ```
 
 | Field                      | Meaning                                                                                  |
 | -------------------------- | ---------------------------------------------------------------------------------------- |
+| `format`                   | `pktito/1`: this format, version 1.                                                       |
 | `file`                     | The transcribed file's name, without its folder.                                         |
 | `duration`                 | The recording's length, in seconds.                                                      |
 | `model`                    | The name of the model that made the transcript.                                          |
-| `segments`                 | The sentences, in order.                                                                 |
+| `language`                 | The language of the words: `en` for the English model, the multilingual model's best guess otherwise, `null` when there are too few words to tell. |
+| `diarizer`, `speakers`     | With `--speakers`: the model that told the voices apart, and each speaker as `id` and `name`, numbered from 1 in the order they first speak. |
+| `segments`                 | The sentences, in order. With speakers, each is one speaker's.                           |
 | `segments[].start`, `.end` | When the sentence starts and ends, in seconds.                                           |
+| `segments[].speaker`       | With speakers, whose sentence it is: an `id` in `speakers`.                              |
 | `segments[].text`          | The sentence, punctuated and cased.                                                      |
-| `segments[].words`         | Its words, each with `start`, `end` (seconds) and `text`, the word with its punctuation. |
+| `segments[].words`         | Its words, each with `word` (the word with its punctuation), `start` and `end` in seconds. |
 | `captions`                 | The subtitle track's cues, the ones `srt` and `vtt` write.                               |
 | `captions[].start`, `.end` | When the cue is shown and hidden, in seconds.                                            |
+| `captions[].speaker`       | With speakers, whose cue it is.                                                          |
 | `captions[].lines`         | The cue's text, as its one or two lines.                                                 |
-| `windows`                  | The stretches the recording was transcribed in, at most 30 seconds each, cut at pauses. Only `pktito-cli` writes them; they show where a cut fell. |
-| `windows[].start`, `.end`  | The stretch whose words are its own, in seconds.                                         |
-| `windows[].gap`            | The silence left out before the next stretch, in seconds; `null` for the last.           |
-| `windows[].first_word`, `.words` | Its words: the first, counted from 0 across all the segments' words, and how many. A sentence that runs across a cut has words in two. |
+| `chunks`                   | The stretches the recording was transcribed in, at most 30 seconds each, cut at pauses. Only `pktito-cli` writes them; they show where a cut fell. |
+| `chunks[].start`, `.end`   | The stretch whose words are its own, in seconds.                                         |
+| `chunks[].gap`             | The silence left out before the next stretch, in seconds; `null` for the last.           |
+| `chunks[].first_word`, `.words` | Its words: the first, counted from 0 across all the segments' words, and how many. A sentence that runs across a cut has words in two. |
+| `chunks[].retried`         | How many of its stretches were heard again where the model wrote no words; left out when none were. |
 
-Times are in seconds, to the millisecond.
+Times are in seconds, to the millisecond. Without `--speakers` there is no `diarizer`, `speakers` or `speaker`.
 
 ## bench
 

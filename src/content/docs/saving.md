@@ -24,26 +24,28 @@ Treat the file as a draft: good captions still need a person's pass for proper n
 
 ## JSON
 
-A JSON transcript holds the file's name, its length in seconds and the model used, then every sentence with its words, and the caption cues. All times are in seconds. From chapter 1 of _Alice's Adventures in Wonderland_, shortened to one sentence:
+A JSON transcript holds the file's name, its length in seconds, the model used and the language, then every sentence with its words, and the caption cues. All times are in seconds. From chapter 1 of _Alice's Adventures in Wonderland_, shortened to one sentence:
 
 ```json
 {
+  "format": "pktito/1",
   "file": "wonderland_ch_01.flac",
   "duration": 640.505,
   "model": "parakeet-tdt-0.6b-v2",
+  "language": "en",
   "segments": [
     {
       "start": 27.601,
       "end": 29.121,
       "text": "And what's the use of a book?",
       "words": [
-        { "start": 27.601, "end": 27.681, "text": "And" },
-        { "start": 27.761, "end": 28.081, "text": "what's" },
-        { "start": 28.081, "end": 28.161, "text": "the" },
-        { "start": 28.161, "end": 28.401, "text": "use" },
-        { "start": 28.401, "end": 28.481, "text": "of" },
-        { "start": 28.481, "end": 28.641, "text": "a" },
-        { "start": 28.641, "end": 29.121, "text": "book?" }
+        { "word": "And", "start": 27.601, "end": 27.681 },
+        { "word": "what's", "start": 27.761, "end": 28.081 },
+        { "word": "the", "start": 28.081, "end": 28.161 },
+        { "word": "use", "start": 28.161, "end": 28.401 },
+        { "word": "of", "start": 28.401, "end": 28.481 },
+        { "word": "a", "start": 28.481, "end": 28.641 },
+        { "word": "book?", "start": 28.641, "end": 29.121 }
       ]
     }
   ],
@@ -62,4 +64,4 @@ A JSON transcript holds the file's name, its length in seconds and the model use
 }
 ```
 
-`pktito-cli` writes the same file; [its reference](/developers/cli#json-output) lists every field.
+With speakers, it also names them, and says whose each sentence and cue is. `pktito-cli` writes the same file; [its reference](/developers/cli#json-output) lists every field.
