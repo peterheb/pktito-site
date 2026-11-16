@@ -6,19 +6,19 @@ order: 4
 
 ## Save as
 
-| Format        | File    | What it holds                                  |
-| ------------- | ------- | ---------------------------------------------- |
-| Text          | `.txt`  | The sentences, one to a line.                  |
-| Subtitles     | `.srt`  | Timed caption cues.                            |
-| Web subtitles | `.vtt`  | The same cues, as WebVTT.                      |
-| Markdown      | `.md`   | A heading, then a paragraph for each sentence. |
-| JSON          | `.json` | Sentences, word timings and caption cues.      |
+| Format                    | File    | What it holds                                  |
+| ------------------------- | ------- | ---------------------------------------------- |
+| Text                      | `.txt`  | The sentences, one to a line.                  |
+| Subtitles                 | `.srt`  | Timed caption cues.                            |
+| Podcast and web subtitles | `.vtt`  | The same cues, as WebVTT.                      |
+| Markdown                  | `.md`   | A heading, then a paragraph for each sentence. |
+| JSON                      | `.json` | Sentences, word timings and caption cues.      |
 
 **Timestamps in .txt and .md**, at the bottom of the menu, puts each sentence's start time before it. Ctrl+S saves as text and Ctrl+Shift+S as subtitles (⌘S and ⌘⇧S on a Mac).
 
 ## Subtitles and captions
 
-pktito can make the first draft of a video's subtitles. It breaks sentences into caption-friendly cues of one or two lines, at most 42 characters each, and marks any cue that goes by faster than 20 characters a second. Switch a finished transcript from **Sentences** to **Captions** to see them, then save as SRT or WebVTT to import into a video editor, player or captioning tool.
+pktito can make the first draft of a video's subtitles. It breaks sentences into caption-friendly cues of one or two lines, at most 42 characters each. Save a finished transcript as SRT or WebVTT to import it into a video editor, player or captioning tool.
 
 Treat the file as a draft: good captions still need a person's pass for proper names, spelling and consistency.
 
