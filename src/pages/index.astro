@@ -2,20 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Arrow from "../components/Arrow.astro";
 import { GITHUB, LIBRARY } from "../lib/site";
-import { RELEASE, machine, spoken } from "../lib/alicebench";
 import { existsSync, readFileSync } from "node:fs";
-// AliceBench v1 (src/lib/alicebench.ts, from ALICEBENCH.md in pktito-app):
-// times real time, the book's 10,731 s over each. A machine's kind, then its
-// cores and CPU; a figure is its Neural Engine's or NPU's where it has one,
-// as the app runs it.
-const HOME = ["m4pro", "9950x", "iphone16e", "s25", "c8a", "surface", "pi5"];
-const SPEED = HOME.map((id) => {
-  const m = machine(id);
-  const r = m.accel ?? m.cpu!;
-  return [m.name, m.accel ? `${m.about.replace(/^\d+ cores, /, "")}, ${m.accel.kind}` : m.about, r.x, spoken(r.x)] as const;
-});
-const top = SPEED[0][2];
-
 // The app's standard shot on each system (pktito-app's design/README.md,
 // "Imagery"), each the size its PNG says. The script after the figure gives
 // a visitor their own system's: iPhone and iPad the Mac's, Android the
@@ -44,8 +31,8 @@ const mac = shots.mac;
     <section class="hero2 wrap">
       <div class="hero2-text">
         <h1 class="display">Drop a file. Read it.</h1>
-        <p class="lead">Speech to text on your computer.</p>
-        <p class="measure">Convert speech to text without the cloud. No GPU or fancy hardware required.</p>
+        <p class="lead">Speech to text on your computer, with who said what.</p>
+        <p class="measure">Turn recordings into text you can read, search and save, with each speaker named. Nothing leaves your computer.</p>
         <div class="actions">
           <a class="pk-btn pk-btn-primary" href="/download">Download</a>
           <Arrow href={GITHUB}>Source on GitHub</Arrow>
@@ -79,37 +66,18 @@ const mac = shots.mac;
       <section class="sect wrap" aria-label="What it does">
         <div class="facts3">
           <div>
-            <h3>Broad format support</h3>
-            <p>pktito opens common formats like MP3, MP4, WAV and FLAC. Optionally integrates with ffmpeg for broader format support.</p>
+            <h3>Who said what</h3>
+            <p>pktito tells up to eight speakers apart and names each turn. Rename them, find where one speaks, and fix a line that went to the wrong person.</p>
           </div>
           <div>
-            <h3>Flexible output options</h3>
-            <p>Plain text, Markdown and JSON with timestamps. Subtitles as SRT or WebVTT.</p>
+            <h3>Your files, as they are</h3>
+            <p>pktito opens common formats like MP3, MP4, WAV and FLAC, and works with ffmpeg for the rest. English, or 25 European languages.</p>
           </div>
           <div>
-            <h3>Two speech models</h3>
-            <p>Choose NVIDIA's English model, or a multilingual model with 25 European languages.</p>
+            <h3>Save it your way</h3>
+            <p>Plain text, Markdown and JSON, with times and speakers. Subtitles as SRT or WebVTT.</p>
           </div>
         </div>
-      </section>
-    </div>
-
-    <div class="band-term">
-      <section class="sect wrap" aria-labelledby="fast">
-        <h2 id="fast">Faster than real time</h2>
-        <p class="measure">Time to transcribe twelve files (2 h 59 min) of <i>Alice's Adventures in Wonderland</i>, using the English model.</p>
-        <div class="speed" role="table" aria-label="Speed by machine">
-          <div class="speed-row speed-head" role="row"><span role="columnheader"><span class="visually-hidden">Machine</span></span><span aria-hidden="true"></span><span role="columnheader">Speed</span><span role="columnheader">Total time</span></div>
-          {SPEED.map(([name, about, x, time]) => (
-            <div class="speed-row" role="row">
-              <div class="speed-name" role="cell"><b>{name}</b><span>{about}</span></div>
-              <div class="speed-bar" aria-hidden="true"><i style={`width:${((x / top) * 100).toFixed(1)}%`}></i></div>
-              <div class="speed-x" role="cell">{Math.round(x)}&times;</div>
-              <div class="speed-time" role="cell">{time}</div>
-            </div>
-          ))}
-        </div>
-        <p class="provenance">AliceBench v1, pktito {RELEASE}, November 2026. The Mac and iPhone run on the Neural Engine, the Galaxy on its NPU. <Arrow href="/developers/benchmarks">Run it yourself</Arrow></p>
       </section>
     </div>
 
@@ -128,6 +96,10 @@ const mac = shots.mac;
         <div>
           <h3>Do I need a GPU?</h3>
           <p>No. pktito runs on the CPU, and on selected NPUs where your computer has one: Apple's Neural Engine on a Mac, two to five times as fast as its CPU, and Qualcomm's NPU in Snapdragon X Elite and X2 Elite PCs, which leaves the CPU free. Even a Raspberry Pi 5 transcribes 14 times faster than real time.</p>
+        </div>
+        <div>
+          <h3>How fast is it?</h3>
+          <p>Faster than you can listen. A recent laptop transcribes an hour of speech in about a minute, and a Raspberry Pi 5 in about four. Telling the speakers apart takes longer. <a href="/developers/benchmarks">The benchmark</a> has the figures for each machine.</p>
         </div>
         <div>
           <h3>Is it really free?</h3>

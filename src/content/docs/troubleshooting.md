@@ -1,7 +1,7 @@
 ---
 title: Troubleshooting
 description: What pktito's messages mean, and what to do about them.
-order: 5
+order: 6
 ---
 
 A message's **Details**, or its tooltip, has what the system or the server said. Include it when [reporting a problem](https://github.com/peterheb/pktito/issues).
