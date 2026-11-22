@@ -68,7 +68,7 @@ Lists each model, its size, and whether it is downloaded or in use.
 pktito-cli download parakeet-tdt-0.6b-v2
 ```
 
-Downloads a model for the app and `pktito-cli` both, taking the same names as `-m`. Supports standard proxy servers (`HTTPS_PROXY`, `ALL_PROXY`, including SOCKS).
+Downloads a model for the app and `pktito-cli` both, taking the same names as `-m`. `pktito-cli download nemotron-3-diarization` downloads the speaker model that `--speakers` needs. Supports standard proxy servers (`HTTPS_PROXY`, `ALL_PROXY`, including SOCKS).
 
 On a Mac with Apple silicon it downloads the model's edition for the Neural Engine, two to five times as fast as the CPU; `download --cpu` gets the model file for the CPU instead. [Models](/docs/models#on-a-mac-the-neural-engine-edition) has both.
 
