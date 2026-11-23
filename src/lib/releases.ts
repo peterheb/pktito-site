@@ -8,6 +8,17 @@ export type Release = { version: string; date: string; notes: string[] };
 
 export const RELEASES: Release[] = [
   {
+    version: "0.9.8",
+    date: "November 22, 2026",
+    notes: [
+      "Speakers: the transcript shows who said what, for up to eight speakers.",
+      "Name a speaker, change a line's speaker, or find one speaker's lines.",
+      "Find: Only matches shows just the lines that match.",
+      "Save as JSON and pktito-cli -f json write one format, pktito/1, with speakers.",
+      "A button takes you back to what is playing when you have scrolled away.",
+    ],
+  },
+  {
     version: "0.9.7",
     date: "November 10, 2026",
     notes: [
@@ -41,12 +52,19 @@ export const RELEASES: Release[] = [
   {
     version: "0.9.4",
     date: "October 30, 2026",
-    notes: ["Faster on Arm, including the Raspberry Pi.", "Intel Xeon: uses AMX."],
+    notes: [
+      "Faster on Arm, including the Raspberry Pi.",
+      "Intel Xeon: uses AMX.",
+    ],
   },
   {
     version: "0.9.3",
     date: "October 27, 2026",
-    notes: ["Recovers speech the model skipped.", "Find follows playback.", "Linux: recordings play."],
+    notes: [
+      "Recovers speech the model skipped.",
+      "Find follows playback.",
+      "Linux: recordings play.",
+    ],
   },
 ];
 
