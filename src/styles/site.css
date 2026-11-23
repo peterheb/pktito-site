@@ -501,6 +501,8 @@
 }
 .faq > div {
   display: grid;
+  /* a column that can shrink: a code block's long lines scroll in it */
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-2);
   align-content: start;
   min-width: 0;
