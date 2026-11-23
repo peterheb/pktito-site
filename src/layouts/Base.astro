@@ -14,6 +14,12 @@ const { title, description, current = "" } = Astro.props;
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!-- the first screen's three Archivo weights, fetched with the page
+         rather than after tokens.css names them: without this the text
+         drew in the fallback face first and changed when they came -->
+    <link rel="preload" href="/fonts/Archivo-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Archivo-500.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Archivo-700.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/tokens.css" />
     <link rel="stylesheet" href="/bundle.css" />
   </head>
