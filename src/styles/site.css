@@ -887,3 +887,108 @@ a.pk-link {
   font-size: 13px;
   color: var(--ink-muted);
 }
+
+/* ------------------------------------------------------- home: the story -- */
+/* the app's own interface, light or dark with the page; no OS chrome, so
+   one picture serves every system */
+.frame {
+  margin: 0;
+  min-width: 0;
+  justify-self: center;
+  width: min(100%, 600px);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--sunk);
+  box-shadow: 0 18px 48px rgba(16, 27, 51, 0.16);
+}
+.frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.frame .dark {
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .frame .light {
+    display: none;
+  }
+  :root:not([data-theme="light"]) .frame .dark {
+    display: block;
+  }
+}
+:root[data-theme="dark"] .frame .light {
+  display: none;
+}
+:root[data-theme="dark"] .frame .dark {
+  display: block;
+}
+.story {
+  display: grid;
+  gap: var(--space-7);
+  padding-block: var(--space-6) var(--space-7);
+}
+.step {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--space-5);
+  align-items: center;
+}
+.step:nth-child(even) .step-text {
+  order: 2;
+}
+.step-text {
+  display: grid;
+  gap: var(--space-3);
+  min-width: 0;
+  max-width: 26em;
+}
+.step-n {
+  font: 400 14px/1 var(--font-mono);
+  color: var(--beak);
+  letter-spacing: 0.04em;
+}
+.step-text h2 {
+  font: 500 30px/1.2 var(--font-sans);
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.step-text p {
+  color: var(--ink-muted);
+}
+.phones {
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: center;
+}
+.phones-text {
+  display: grid;
+  gap: var(--space-4);
+  min-width: 0;
+}
+.phones-text h2 {
+  font: 500 30px/1.2 var(--font-sans);
+}
+.phones-text p {
+  color: var(--ink-muted);
+}
+.phones-shots {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  min-width: 0;
+}
+.phones-shots img {
+  width: min(30%, 200px);
+  height: auto;
+  border-radius: 22px;
+  border: 1px solid var(--term-line);
+}
+@media (max-width: 820px) {
+  .step,
+  .phones {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .step:nth-child(even) .step-text {
+    order: 0;
+  }
+}

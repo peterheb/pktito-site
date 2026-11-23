@@ -1,73 +1,79 @@
 ---
 import Base from "../layouts/Base.astro";
 import Arrow from "../components/Arrow.astro";
-import { GITHUB, LIBRARY } from "../lib/site";
-import { existsSync, readFileSync } from "node:fs";
-// The app's standard shot on each system (pktito-app's design/README.md,
-// "Imagery"), each the size its PNG says. The script after the figure gives
-// a visitor their own system's: iPhone and iPad the Mac's, Android the
-// Windows one, ChromeOS the Linux one, and the Mac's where a system's shots
-// aren't here yet. A system's shots show up when `npm run sync` brings them.
-const SYSTEMS = { mac: "on a Mac", windows: "on Windows", linux: "on Linux" };
-const ABOUT = "showing the transcript of chapter 1 of Alice's Adventures in Wonderland, each sentence beside its time.";
-const png = (f) => {
-  const b = readFileSync(f);
-  return { w: b.readUInt32BE(16), h: b.readUInt32BE(20) };
-};
-const shots = {};
-for (const [os, on] of Object.entries(SYSTEMS)) {
-  const file = (t) => `public/screenshots/${os}-${t}.png`;
-  if (!existsSync(file("light")) || !existsSync(file("dark"))) continue;
-  shots[os] = {
-    ...png(file("light")),
-    light: { src: `/screenshots/${os}-light.png`, alt: `The pktito window ${on}, ${ABOUT}` },
-    dark: { src: `/screenshots/${os}-dark.png`, alt: `The pktito window ${on} in dark mode, ${ABOUT}` },
-  };
-}
-const mac = shots.mac;
+import { GITHUB } from "../lib/site";
+// The journey the store listings tell, one step a row, each the desktop
+// app's own interface (pktito-share earnest/story: shoot-mac.js, the UI
+// harness on 0.9.8's ui/, Earnest act 1 as transcribed with speakers),
+// light and dark, 1200 px for a 600 px column.
+const PLAY = "https://play.google.com/store/apps/details?id=net.pktito.app";
+const steps = [
+  { shot: "setup", head: "Private and local", text: "Download a speech model once, about 600 MB. After that pktito works with no connection, and your recordings never leave your computer.", alt: "Choosing a speech model: English or multilingual, with the speaker model after it." },
+  { shot: "start", head: "Open a recording or a video", text: "Drop a file on the window or choose one: MP3, M4A, WAV, FLAC, MP4, MOV and most other audio and video. Recent transcripts stay a click away.", alt: "The start screen: a place to drop audio or video, and three recent recordings." },
+  { shot: "live", head: "Watch the transcript arrive", text: "Lines appear as pktito works, far faster than you could listen: a 45-minute recording took 15 seconds on a Mac mini with M4 Pro, speakers included.", alt: "A recording 42% transcribed at 177 times real time, its lines filling in." },
+  { shot: "rename", head: "Name each speaker", text: "pktito tells up to eight voices apart. Name each one once and every line uses the name. A line that went to the wrong person is a click to fix.", alt: "Renaming Jack, over the transcript of The Importance of Being Earnest." },
+  { shot: "find", head: "Search every word", text: "Find a word anywhere in hours of audio, and click a line to hear it from that moment.", alt: "Bunbury found 22 times, each match marked in the transcript and on the waveform." },
+  { shot: "follow", head: "Search by speaker", text: "Pick a name to see just what they said, and step through their turns one by one.", alt: "Only Jack's lines, 127 of them, with the rest of the transcript set aside." },
+];
+const who = { alt: "The transcript of The Importance of Being Earnest, act 1, each line with its speaker's name and colour, the recording playing at Lane's line." };
 ---
-<Base title="pktito: speech to text on your computer" description="pktito transcribes audio and video on your computer, for macOS, Windows and Linux. Free and open source.">
+
+<Base title="pktito: who said what, in any recording" description="pktito transcribes audio and video on your computer or phone, with each speaker named, for macOS, Windows, Linux and Android. Free and open source.">
   <main>
     <section class="hero2 wrap">
       <div class="hero2-text">
-        <h1 class="display">Drop a file. Read it.</h1>
-        <p class="lead">Speech to text on your computer, with who said what.</p>
-        <p class="measure">Turn recordings into text you can read, search and save, with each speaker named. Nothing leaves your computer.</p>
+        <h1 class="display">Who said what, in any recording.</h1>
+        <p class="lead">Speech to text for podcasts, interviews, lectures and videos, on your own computer or phone.</p>
+        <p class="measure">Free and open source. Nothing leaves your device.</p>
         <div class="actions">
           <a class="pk-btn pk-btn-primary" href="/download">Download</a>
           <Arrow href={GITHUB}>Source on GitHub</Arrow>
         </div>
-        <p class="platforms">Open source for macOS, Windows and Linux.</p>
+        <p class="platforms">For macOS, Windows, Linux and Android. iPhone and iPad soon.</p>
       </div>
-      <figure class="shot">
-        <img class="light" width={mac.w} height={mac.h} alt={mac.light.alt} />
-        <img class="dark" width={mac.w} height={mac.h} alt={mac.dark.alt} />
-        <noscript><img class="light" src={mac.light.src} width={mac.w} height={mac.h} alt={mac.light.alt} /><img class="dark" src={mac.dark.src} width={mac.w} height={mac.h} alt={mac.dark.alt} /></noscript>
+      <figure class="frame">
+        <img class="light" src="/story/who-light.webp" width="1200" height="1112" alt={who.alt} />
+        <img class="dark" src="/story/who-dark.webp" width="1200" height="1112" alt={who.alt} />
       </figure>
-      <script is:inline define:vars={{ shots }}>
-        // the visitor's system, from the platform Chromium names or the user
-        // agent everyone sends; Android before Linux, whose name its agent holds
-        {
-          const say = ((navigator.userAgentData && navigator.userAgentData.platform) || "") + " " + navigator.userAgent;
-          const os = /Android/i.test(say) ? "windows" : /iPhone|iPad|iPod|Mac/i.test(say) ? "mac" : /Win/i.test(say) ? "windows" : /Linux|X11|CrOS|Chrome OS/i.test(say) ? "linux" : "mac";
-          const s = shots[os] || shots.mac;
-          for (const img of document.querySelectorAll(".shot > img")) {
-            const t = img.classList.contains("dark") ? s.dark : s.light;
-            img.width = s.w;
-            img.height = s.h;
-            img.alt = t.alt;
-            img.src = t.src;
-          }
-        }
-      </script>
     </section>
+
+    <section class="wrap story" aria-label="How it works">
+      {steps.map((s, i) => (
+        <div class="step">
+          <div class="step-text">
+            <span class="step-n">{String(i + 1).padStart(2, "0")}</span>
+            <h2>{s.head}</h2>
+            <p>{s.text}</p>
+          </div>
+          <figure class="frame">
+            <img class="light" src={`/story/${s.shot}-light.webp`} width="1200" height="1112" alt={s.alt} loading="lazy" />
+            <img class="dark" src={`/story/${s.shot}-dark.webp`} width="1200" height="1112" alt={s.alt} loading="lazy" />
+          </figure>
+        </div>
+      ))}
+    </section>
+
+    <div class="band-term">
+      <section class="sect wrap phones" aria-labelledby="phones">
+        <div class="phones-text">
+          <h2 id="phones">On your phone too</h2>
+          <p>The same app on Android, with the iPhone and iPad version in App Store review. Transcription runs on the phone itself, on its NPU or Neural Engine where it has one.</p>
+          <div class="actions"><a class="pk-btn pk-btn-primary" href={PLAY}>Get it on Google Play</a></div>
+        </div>
+        <div class="phones-shots">
+          <img src="/story/phone-live.webp" width="560" height="1218" alt="A transcript arriving on an iPhone." loading="lazy" />
+          <img src="/story/phone-who.webp" width="560" height="1218" alt="A transcript with each speaker named, playing on an iPhone." loading="lazy" />
+          <img src="/story/phone-follow.webp" width="560" height="1218" alt="Only Jack's lines, on an iPhone." loading="lazy" />
+        </div>
+      </section>
+    </div>
 
     <div class="band-surface">
       <section class="sect wrap" aria-label="What it does">
         <div class="facts3">
           <div>
-            <h3>Who said what</h3>
-            <p>pktito tells up to eight speakers apart and names each turn. Rename them, find where one speaks, and fix a line that went to the wrong person.</p>
+            <h3>Speakers in every format</h3>
+            <p>Each line names its speaker. Copy or save with the names, or turn speakers off when one voice is all there is and transcription runs faster.</p>
           </div>
           <div>
             <h3>Your files, as they are</h3>
@@ -90,6 +96,7 @@ const mac = shots.mac;
             <li><b>macOS</b> 12 or later, on Apple silicon</li>
             <li><b>Windows</b> 10 and 11, on x64 or Arm</li>
             <li><b>Linux</b> with glibc 2.34 or later (Ubuntu 22.04, Debian 12, Raspberry Pi OS 12), on x86-64 or Arm64</li>
+            <li><b>Android</b> 10 or later, from <a href={PLAY}>Google Play</a></li>
           </ul>
           <p>The speech model, about 600 MB, is downloaded on first launch.</p>
         </div>
