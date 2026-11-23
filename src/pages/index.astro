@@ -5,11 +5,12 @@ import { GITHUB } from "../lib/site";
 // The journey the store listings tell, one step a row, each the desktop
 // app's own interface (pktito-share earnest/story: shoot-mac.js, the UI
 // harness on 0.9.8's ui/, Earnest act 1 as transcribed with speakers),
-// light and dark, 1200 px for a 600 px column.
+// light and dark, 1200 px for a 560 px column; the two screens with little
+// on them (setup, start) in windows their height (h), not mostly empty.
 const PLAY = "https://play.google.com/store/apps/details?id=net.pktito.app";
 const steps = [
-  { shot: "setup", head: "Private and local", text: "Download a speech model once, about 600 MB. After that pktito works with no connection, and your recordings never leave your computer.", alt: "Choosing a speech model: English or multilingual, with the speaker model after it." },
-  { shot: "start", head: "Open a recording or a video", text: "Drop a file on the window or choose one: MP3, M4A, WAV, FLAC, MP4, MOV and most other audio and video. Recent transcripts stay a click away.", alt: "The start screen: a place to drop audio or video, and three recent recordings." },
+  { shot: "setup", h: 761, head: "Private and local", text: "Download a speech model once, about 600 MB. After that pktito works with no connection, and your recordings never leave your computer.", alt: "Choosing a speech model: English or multilingual, with the speaker model after it." },
+  { shot: "start", h: 644, head: "Open a recording or a video", text: "Drop a file on the window or choose one: MP3, M4A, WAV, FLAC, MP4, MOV and most other audio and video. Recent transcripts stay a click away.", alt: "The start screen: a place to drop audio or video, and three recent recordings." },
   { shot: "live", head: "Watch the transcript arrive", text: "Lines appear as pktito works, far faster than you could listen: a 45-minute recording took 15 seconds on a Mac mini with M4 Pro, speakers included.", alt: "A recording 42% transcribed at 177 times real time, its lines filling in." },
   { shot: "rename", head: "Name each speaker", text: "pktito tells up to eight voices apart. Name each one once and every line uses the name. A line that went to the wrong person is a click to fix.", alt: "Renaming Jack, over the transcript of The Importance of Being Earnest." },
   { shot: "find", head: "Search every word", text: "Find a word anywhere in hours of audio, and click a line to hear it from that moment.", alt: "Bunbury found 22 times, each match marked in the transcript and on the waveform." },
@@ -37,18 +38,33 @@ const who = { alt: "The transcript of The Importance of Being Earnest, act 1, ea
       </figure>
     </section>
 
-    <section class="wrap story" aria-label="How it works">
+    <div class="band-term">
+      <section class="wrap get" aria-labelledby="get">
+        <h2 id="get">Get pktito</h2>
+        <ul class="get-list">
+          <li><span class="get-os">Mac</span><span class="get-note">macOS 12 or later, Apple silicon</span><a class="pk-btn pk-btn-primary" href="/download/macos">Download</a></li>
+          <li><span class="get-os">Windows</span><span class="get-note">Windows 10 and 11, x64 or Arm</span><a class="store-badge" href="https://apps.microsoft.com/detail/9MW58B2T1ZVW"><img src="/ms-store-badge.svg" alt="Download from the Microsoft Store" width="161" height="44" /></a></li>
+          <li><span class="get-os">Linux</span><span class="get-note">A .deb for x86-64 and Arm64</span><a class="pk-btn pk-btn-quiet" href="/download">Download</a></li>
+          <li><span class="get-os">Android</span><span class="get-note">Android 10 or later</span><a class="pk-btn pk-btn-quiet" href={PLAY}>Google Play</a></li>
+          <li><span class="get-os">iPhone and iPad</span><span class="get-note">In App Store review</span><span class="get-soon">Soon</span></li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="story" aria-label="How it works">
       {steps.map((s, i) => (
-        <div class="step">
-          <div class="step-text">
-            <span class="step-n">{String(i + 1).padStart(2, "0")}</span>
-            <h2>{s.head}</h2>
-            <p>{s.text}</p>
+        <div class={i % 2 ? "band-surface" : ""}>
+          <div class={`wrap step${i % 2 ? " flip" : ""}`}>
+            <div class="step-text">
+              <span class="step-n">{String(i + 1).padStart(2, "0")}</span>
+              <h2>{s.head}</h2>
+              <p>{s.text}</p>
+            </div>
+            <figure class="frame">
+              <img class="light" src={`/story/${s.shot}-light.webp`} width="1200" height={s.h || 1112} alt={s.alt} loading="lazy" />
+              <img class="dark" src={`/story/${s.shot}-dark.webp`} width="1200" height={s.h || 1112} alt={s.alt} loading="lazy" />
+            </figure>
           </div>
-          <figure class="frame">
-            <img class="light" src={`/story/${s.shot}-light.webp`} width="1200" height="1112" alt={s.alt} loading="lazy" />
-            <img class="dark" src={`/story/${s.shot}-dark.webp`} width="1200" height="1112" alt={s.alt} loading="lazy" />
-          </figure>
         </div>
       ))}
     </section>
