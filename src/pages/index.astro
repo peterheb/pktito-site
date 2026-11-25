@@ -8,6 +8,7 @@ import { GITHUB } from "../lib/site";
 // light and dark, 1200 px for a 560 px column; the two screens with little
 // on them (setup, start) in windows their height (h), not mostly empty.
 const PLAY = "https://play.google.com/store/apps/details?id=net.pktito.app";
+const APPSTORE = "https://apps.apple.com/us/app/pktito-speech-to-text/id6829990587";
 const steps = [
   { shot: "setup", h: 761, head: "Private and local", text: "Download a speech model once, about 600 MB. After that pktito works with no connection, and your recordings never leave your computer.", alt: "Choosing a speech model: English or multilingual, with the speaker model after it." },
   { shot: "start", h: 644, head: "Open a recording or a video", text: "Drop a file on the window or choose one: MP3, M4A, WAV, FLAC, MP4, MOV and most other audio and video. Recent transcripts stay a click away.", alt: "The start screen: a place to drop audio or video, and three recent recordings." },
@@ -19,7 +20,7 @@ const steps = [
 const who = { alt: "The transcript of The Importance of Being Earnest, act 1, each line with its speaker's name and colour, the recording playing at Lane's line." };
 ---
 
-<Base title="pktito: who said what, in any recording" description="pktito transcribes audio and video on your computer or phone, with each speaker named, for macOS, Windows, Linux and Android. Free and open source.">
+<Base title="pktito: who said what, in any recording" description="pktito transcribes audio and video on your computer or phone, with each speaker named, for macOS, Windows, Linux, Android, iPhone and iPad. Free and open source.">
   <main>
     <section class="hero2 wrap">
       <div class="hero2-text">
@@ -30,7 +31,7 @@ const who = { alt: "The transcript of The Importance of Being Earnest, act 1, ea
           <a class="pk-btn pk-btn-primary" href="/download">Download</a>
           <Arrow href={GITHUB}>Source on GitHub</Arrow>
         </div>
-        <p class="platforms">For macOS, Windows, Linux and Android. iPhone and iPad soon.</p>
+        <p class="platforms">For macOS, Windows, Linux, Android, iPhone and iPad.</p>
       </div>
       <figure class="frame">
         <img class="light" src="/story/who-light.webp" width="1200" height="1112" alt={who.alt} />
@@ -46,7 +47,7 @@ const who = { alt: "The transcript of The Importance of Being Earnest, act 1, ea
           <li><span class="get-os">Windows</span><span class="get-note">Windows 10 and 11, x64 or Arm</span><a class="store-badge" href="https://apps.microsoft.com/detail/9MW58B2T1ZVW"><img src="/ms-store-badge.svg" alt="Download from the Microsoft Store" width="161" height="44" /></a></li>
           <li><span class="get-os">Linux</span><span class="get-note">A .deb for x86-64 and Arm64</span><a class="pk-btn pk-btn-quiet" href="/download">Download</a></li>
           <li><span class="get-os">Android</span><span class="get-note">Android 10 or later</span><a class="pk-btn pk-btn-quiet" href={PLAY}>Google Play</a></li>
-          <li><span class="get-os">iPhone and iPad</span><span class="get-note">In App Store review</span><span class="get-soon">Soon</span></li>
+          <li><span class="get-os">iPhone and iPad</span><span class="get-note">iOS and iPadOS 18 or later</span><a class="pk-btn pk-btn-quiet" href={APPSTORE}>App Store</a></li>
         </ul>
       </section>
     </div>
@@ -73,8 +74,8 @@ const who = { alt: "The transcript of The Importance of Being Earnest, act 1, ea
       <section class="sect wrap phones" aria-labelledby="phones">
         <div class="phones-text">
           <h2 id="phones">On your phone too</h2>
-          <p>The same app on Android, with the iPhone and iPad version in App Store review. Transcription runs on the phone itself, on its NPU or Neural Engine where it has one.</p>
-          <div class="actions"><a class="pk-btn pk-btn-primary" href={PLAY}>Get it on Google Play</a></div>
+          <p>The same app on Android, iPhone and iPad. Transcription runs on the phone itself, on its NPU or Neural Engine where it has one.</p>
+          <div class="actions"><a class="pk-btn pk-btn-primary" href={APPSTORE}>Get it on the App Store</a><a class="pk-btn pk-btn-primary" href={PLAY}>Get it on Google Play</a></div>
         </div>
         <div class="phones-shots">
           <img src="/story/phone-live.webp" width="560" height="1218" alt="A transcript arriving on an iPhone." loading="lazy" />
@@ -113,6 +114,7 @@ const who = { alt: "The transcript of The Importance of Being Earnest, act 1, ea
             <li><b>Windows</b> 10 and 11, on x64 or Arm</li>
             <li><b>Linux</b> with glibc 2.34 or later (Ubuntu 22.04, Debian 12, Raspberry Pi OS 12), on x86-64 or Arm64</li>
             <li><b>Android</b> 10 or later, from <a href={PLAY}>Google Play</a></li>
+            <li><b>iPhone and iPad</b> with iOS or iPadOS 18 or later, from the <a href={APPSTORE}>App Store</a></li>
           </ul>
           <p>The speech model, about 600 MB, is downloaded on first launch.</p>
         </div>

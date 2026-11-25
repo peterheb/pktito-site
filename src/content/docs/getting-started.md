@@ -13,7 +13,8 @@ Download pktito for your system from the [download page](/download).
 | macOS   | macOS 12 or later, Apple silicon                                        | A disk image: drag pktito to Applications.         |
 | Windows | Windows 10 or 11, x64 or Arm64                                          | Installer (.exe) or [Microsoft Store](https://apps.microsoft.com/detail/9MW58B2T1ZVW), which updates automatically. |
 | Linux   | glibc 2.34 or later, x86-64 or Arm64.<br/>(Ubuntu 22+, Debian 12+, derivatives) | A .deb file. pktito opens from the apps menu, or `pktito` in a terminal. |
-| Android | Android 10 or later                                                     | Google Play (coming soon, after a closed beta). |
+| Android | Android 10 or later                                                     | [Google Play](https://play.google.com/store/apps/details?id=net.pktito.app). |
+| iPhone and iPad | iOS or iPadOS 18 or later                                       | [App Store](https://apps.apple.com/us/app/pktito-speech-to-text/id6829990587). |
 
 ## Requirements
 
